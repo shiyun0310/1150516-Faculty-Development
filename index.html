@@ -62,13 +62,10 @@
 
         @media (min-width: 1024px) {
             .section-block {
-                /* 每個區塊佔據完整視窗高度 */
                 min-height: 100vh;
                 display: flex;
                 flex-direction: column;
-                /* 確保內容在「扣除 Header 後的空間」內置中 */
                 justify-content: center;
-                /* 關鍵補償：加上 Header 的高度，防止內容被遮擋並修正視覺中心 */
                 padding-top: 80px; 
                 padding-bottom: 2rem;
             }
@@ -143,7 +140,6 @@
             color: #0284c7;
         }
 
-        /* 至頂按鈕顯示動畫 */
         #backToTopBtn.show {
             opacity: 1;
             visibility: visible;
@@ -173,14 +169,19 @@
     <nav class="fixed top-0 w-full z-50 glass-nav transition-all duration-300 h-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
             <div class="flex items-center justify-between h-full">
-                <!-- 加大品牌字體至 text-2xl 並同步加大圖示 -->
-                <a href="#hero" class="flex items-center gap-2.5 text-tech-text font-black text-2xl tracking-wider shrink-0">
-                    <i data-lucide="cpu" class="text-tech-primary w-8 h-8"></i>
+                <a href="#hero" class="flex items-center gap-3 text-tech-text font-black text-2xl tracking-wider shrink-0">
+                    <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-sky-100 shadow-sm flex items-center justify-center bg-white">
+                        <img 
+                            src="https://raw.githubusercontent.com/shiyun0310/1150516-Faculty-Development/main/LINE%E9%A0%AD%E8%B2%BC-3.jpg" 
+                            alt="奇美醫院教學部 Logo" 
+                            class="w-full h-full object-cover"
+                            onerror="this.onerror=null; this.parentElement.innerHTML='<i data-lucide=\'cpu\' class=\'text-tech-primary w-6 h-6\'></i>'; lucide.createIcons();"
+                        >
+                    </div>
                     <span>奇美醫院<span class="text-tech-primary">教學部</span></span>
                 </a>
                 
                 <div class="flex items-center gap-6 lg:gap-10">
-                    <!-- 導航字體維持 text-lg -->
                     <div class="hidden lg:flex items-center space-x-8 text-lg xl:text-xl">
                         <a href="#core-concept" class="text-tech-textMuted hover:text-tech-primary font-bold tracking-wide transition-colors">核心理念</a>
                         <a href="#details" class="text-tech-textMuted hover:text-tech-primary font-bold tracking-wide transition-colors">詳細內容</a>
@@ -203,7 +204,6 @@
         <!-- 第一區塊: Hero -->
         <section id="hero" class="section-block mb-24 lg:mb-0">
             <div class="text-center animate-float w-full">
-                <!-- 倒數計時顯示區 -->
                 <div id="countdown-container" class="mb-6 inline-flex items-center gap-2.5 bg-white/60 backdrop-blur-md border border-sky-100 px-5 py-2 rounded-full shadow-sm">
                     <span class="relative flex h-3 w-3">
                         <span class="animate-ping-slow absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
@@ -224,7 +224,6 @@
                 </h2>
 
                 <div class="flex flex-col md:flex-row justify-center gap-4 sm:gap-6 max-w-4xl mx-auto">
-                    <!-- 活動日期卡片 -->
                     <div class="glass-panel rounded-3xl p-6 sm:p-8 flex flex-col items-center sm:items-start gap-5 w-full md:w-1/2 hover:bg-white/80 group">
                         <div class="flex items-center gap-5 w-full">
                             <div class="p-3.5 bg-sky-50 rounded-xl border border-sky-100 group-hover:scale-110 transition-transform">
@@ -244,7 +243,6 @@
                         </a>
                     </div>
 
-                    <!-- 活動地點卡片 -->
                     <div class="glass-panel rounded-3xl p-6 sm:p-8 flex flex-col items-center sm:items-start gap-5 w-full md:w-1/2 hover:bg-white/80 group">
                         <div class="flex items-center gap-5 w-full">
                             <div class="p-3.5 bg-cyan-50 rounded-xl border border-cyan-100 group-hover:scale-110 transition-transform">
@@ -281,42 +279,30 @@
         <section id="core-concept" class="section-block mb-24 lg:mb-0">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center w-full">
                 <div class="lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left">
-                    <!-- 更深色、減少透明度的智慧網絡圖形 -->
                     <div class="relative w-56 h-56 lg:w-72 lg:h-72 mb-8 flex items-center justify-center animate-float">
-                        <!-- 加深的外層旋轉環 -->
                         <div class="absolute inset-0 border-2 border-tech-primary/30 rounded-full animate-spin-slow"></div>
                         <div class="absolute inset-10 border-2 border-tech-secondary/30 rounded-full animate-spin-reverse"></div>
-                        
-                        <!-- 加深核心節點與線條 -->
                         <div class="relative z-10 w-full h-full flex items-center justify-center">
                             <svg viewBox="0 0 100 100" class="w-full h-full">
-                                <!-- 加深連結線 (透明度由 30% 提高到 60%) -->
                                 <g stroke="currentColor" stroke-width="0.8" class="text-tech-primary/60">
                                     <line x1="50" y1="50" x2="50" y2="20" class="animate-pulse" />
                                     <line x1="50" y1="50" x2="75" y2="65" class="animate-pulse" style="animation-delay: 0.5s;" />
                                     <line x1="50" y1="50" x2="25" y2="65" class="animate-pulse" style="animation-delay: 1s;" />
                                 </g>
-                                
-                                <!-- 加深核心圓點 (透明度由 5% 提高到 20%) -->
                                 <circle cx="50" cy="50" r="16" class="text-tech-primary/20 fill-current" />
                                 <circle cx="50" cy="50" r="7" class="text-tech-primary fill-current shadow-xl shadow-tech-primary/50" />
                                 <circle cx="50" cy="50" r="12" class="text-tech-primary animate-ping-slow opacity-40 border-2" fill="none" stroke="currentColor" />
-                                
-                                <!-- 加深周邊節點 -->
                                 <g class="animate-spin-slow" style="transform-origin: center;">
                                     <circle cx="50" cy="20" r="5" class="text-tech-secondary fill-current shadow-lg" />
                                     <circle cx="75" cy="65" r="5" class="text-tech-accent fill-current shadow-lg" />
                                     <circle cx="25" cy="65" r="5" class="text-tech-primaryLight fill-current shadow-lg" />
                                 </g>
                             </svg>
-                            
-                            <!-- 中央白色圖示 -->
                             <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
                                 <i data-lucide="book-open" class="w-8 h-8 text-white"></i>
                             </div>
                         </div>
                     </div>
-
                     <div class="space-y-4">
                         <h3 class="text-5xl lg:text-7xl font-black tech-text-gradient leading-none tracking-tight">核心理念</h3>
                         <div class="w-24 h-1.5 bg-gradient-to-r from-tech-primary to-tech-secondary rounded-full mx-auto lg:mx-0"></div>
@@ -367,69 +353,66 @@
                     </h3>
                 </div>
                 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10">
-                    <!-- 參與對象 -->
-                    <div class="glass-panel rounded-3xl p-8 lg:p-10 hover:bg-white/80 transition-all flex flex-col h-full">
-                        <div class="flex items-center justify-between mb-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
+                    <div class="glass-panel rounded-3xl p-6 lg:p-8 hover:bg-white/80 transition-all flex flex-col h-full">
+                        <div class="flex items-center justify-between mb-6">
                             <div class="flex items-center gap-4">
-                                <div class="w-12 h-12 rounded-2xl bg-violet-50 flex items-center justify-center text-tech-secondary shadow-inner">
-                                    <i data-lucide="users" class="w-6 h-6"></i>
+                                <div class="w-10 h-10 rounded-xl bg-violet-50 flex items-center justify-center text-tech-secondary shadow-inner">
+                                    <i data-lucide="users" class="w-5 h-5"></i>
                                 </div>
                                 <h4 class="text-2xl font-bold text-tech-text tracking-tight">參與對象</h4>
                             </div>
                         </div>
                         
-                        <div class="space-y-4 flex-grow">
-                            <p class="text-tech-textMuted text-lg lg:text-xl font-bold leading-relaxed mb-1">
+                        <div class="space-y-3 flex-grow">
+                            <p class="text-tech-textMuted text-lg font-bold leading-relaxed mb-1">
                                 奇美醫療體系三院區：
                             </p>
-                            <div class="grid grid-cols-1 gap-3.5">
-                                <div class="bg-white/50 border border-slate-100 p-3 lg:p-3.5 rounded-2xl flex items-center gap-3 group transition-all hover:bg-white hover:shadow-sm">
-                                    <div class="bg-tech-secondary/10 p-2 rounded-xl"><i data-lucide="user-cog" class="w-6 h-6 text-tech-secondary"></i></div>
-                                    <span class="font-bold text-tech-text text-lg lg:text-xl tracking-tight">計畫主持人</span>
+                            <div class="grid grid-cols-1 gap-2.5">
+                                <div class="bg-white/50 border border-slate-100 p-2.5 rounded-xl flex items-center gap-3 group transition-all hover:bg-white">
+                                    <div class="bg-tech-secondary/10 p-1.5 rounded-lg"><i data-lucide="user-cog" class="w-5 h-5 text-tech-secondary"></i></div>
+                                    <span class="font-bold text-tech-text text-lg tracking-tight">計畫主持人</span>
                                 </div>
-                                <div class="bg-white/50 border border-slate-100 p-3 lg:p-3.5 rounded-2xl flex items-center gap-3 group transition-all hover:bg-white hover:shadow-sm">
-                                    <div class="bg-tech-accent/10 p-2 rounded-xl"><i data-lucide="clipboard-check" class="w-6 h-6 text-tech-accent"></i></div>
-                                    <span class="font-bold text-tech-text text-lg lg:text-xl tracking-tight">教學負責人</span>
+                                <div class="bg-white/50 border border-slate-100 p-2.5 rounded-xl flex items-center gap-3 group transition-all hover:bg-white">
+                                    <div class="bg-tech-accent/10 p-1.5 rounded-lg"><i data-lucide="clipboard-check" class="w-5 h-5 text-tech-accent"></i></div>
+                                    <span class="font-bold text-tech-text text-lg tracking-tight">教學負責人</span>
                                 </div>
-                                <div class="bg-white/50 border border-slate-100 p-3 lg:p-3.5 rounded-2xl flex items-center gap-3 group transition-all hover:bg-white hover:shadow-sm">
-                                    <div class="bg-tech-primary/10 p-2 rounded-xl"><i data-lucide="graduation-cap" class="w-6 h-6 text-tech-primary"></i></div>
-                                    <span class="font-bold text-tech-text text-lg lg:text-xl tracking-tight">臨床教師</span>
+                                <div class="bg-white/50 border border-slate-100 p-2.5 rounded-xl flex items-center gap-3 group transition-all hover:bg-white">
+                                    <div class="bg-tech-primary/10 p-1.5 rounded-lg"><i data-lucide="graduation-cap" class="w-5 h-5 text-tech-primary"></i></div>
+                                    <span class="font-bold text-tech-text text-lg tracking-tight">臨床教師</span>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 名額標示 -->
-                        <div class="mt-8 pt-6 border-t border-slate-100 flex flex-col items-center justify-center gap-3">
-                            <div class="bg-tech-primary text-white px-8 py-2.5 rounded-full text-lg font-black shadow-lg shadow-tech-primary/30 animate-pulse">
+                        <div class="mt-6 pt-5 border-t border-slate-100 flex flex-col items-center justify-center gap-3">
+                            <div class="bg-tech-primary text-white px-6 py-2 rounded-full text-base font-black shadow-lg shadow-tech-primary/30 animate-pulse">
                                 限額 150 名
                             </div>
                         </div>
                     </div>
 
-                    <!-- 學分認證 -->
-                    <div class="glass-panel rounded-3xl p-8 lg:p-10 hover:bg-white/80 transition-all">
-                        <div class="flex items-center gap-4 mb-8">
-                            <div class="w-12 h-12 rounded-2xl bg-sky-50 flex items-center justify-center text-tech-primary shadow-inner">
-                                <i data-lucide="award" class="w-6 h-6"></i>
+                    <div class="glass-panel rounded-3xl p-6 lg:p-8 hover:bg-white/80 transition-all">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-10 h-10 rounded-xl bg-sky-50 flex items-center justify-center text-tech-primary shadow-inner">
+                                <i data-lucide="award" class="w-5 h-5"></i>
                             </div>
                             <h4 class="text-2xl font-bold text-tech-text tracking-tight">學分認證</h4>
                         </div>
-                        <ul class="text-tech-textMuted text-lg lg:text-xl space-y-6 font-medium">
-                            <li class="flex items-start gap-3">
-                                <div class="bg-sky-50 p-1 rounded-full shrink-0"><i data-lucide="check" class="w-5 h-5 text-tech-primary"></i></div>
+                        <ul class="text-tech-textMuted text-lg space-y-4 font-medium">
+                            <li class="flex items-start gap-2.5">
+                                <div class="bg-sky-50 p-1 rounded-full shrink-0"><i data-lucide="check" class="w-4 h-4 text-tech-primary"></i></div>
                                 <span>臨床教師認證B類「六大核心」<span class="text-tech-primary font-bold">3學分</span></span>
                             </li>
-                            <li class="flex items-start gap-3">
-                                <div class="bg-sky-50 p-1 rounded-full shrink-0"><i data-lucide="check" class="w-5 h-5 text-tech-primary"></i></div>
+                            <li class="flex items-start gap-2.5">
+                                <div class="bg-sky-50 p-1 rounded-full shrink-0"><i data-lucide="check" class="w-4 h-4 text-tech-primary"></i></div>
                                 <span>臨床教師認證「進階」<span class="text-tech-primary font-bold">1.5學分</span></span>
                             </li>
-                            <li class="flex items-start gap-3">
-                                <div class="bg-sky-50 p-1 rounded-full shrink-0"><i data-lucide="check" class="w-5 h-5 text-tech-primary"></i></div>
+                            <li class="flex items-start gap-2.5">
+                                <div class="bg-sky-50 p-1 rounded-full shrink-0"><i data-lucide="check" class="w-4 h-4 text-tech-primary"></i></div>
                                 <span>教學訓練計畫主持人培訓課程</span>
                             </li>
-                            <li class="flex items-start gap-3 text-tech-primary font-bold">
-                                <div class="bg-sky-100 p-1 rounded-full shrink-0"><i data-lucide="check" class="w-5 h-5 text-tech-primary"></i></div>
+                            <li class="flex items-start gap-2.5 text-tech-primary font-bold">
+                                <div class="bg-sky-100 p-1 rounded-full shrink-0"><i data-lucide="check" class="w-4 h-4 text-tech-primary"></i></div>
                                 <span>衛生福利部繼續教育積分 (申請中)</span>
                             </li>
                         </ul>
@@ -493,12 +476,16 @@
                                     <h4 class="text-2xl font-bold text-tech-text mb-6">PEC 概論</h4>
                                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                         <div class="bg-white/80 p-5 rounded-2xl border border-cyan-50 shadow-sm">
-                                            <p class="text-sm text-tech-accent font-black tracking-widest mb-3 uppercase flex items-center gap-2"><i data-lucide="mic" class="w-4 h-4"></i> Speaker / 講者</p>
+                                            <p class="text-lg text-tech-accent font-black tracking-widest mb-3 uppercase flex items-center gap-2">
+                                                <i data-lucide="mic" class="w-5 h-5"></i> 講者
+                                            </p>
                                             <p class="text-2xl text-tech-text font-bold">郭淑柳 副主任</p>
                                             <p class="text-tech-textMuted text-base font-medium">臺北醫學大學附設醫院教學部</p>
                                         </div>
                                         <div class="bg-white/80 p-5 rounded-2xl border border-cyan-50 shadow-sm">
-                                            <p class="text-sm text-tech-secondary font-black tracking-widest mb-3 uppercase flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4"></i> Chair / 座長</p>
+                                            <p class="text-lg text-tech-secondary font-black tracking-widest mb-3 uppercase flex items-center gap-2">
+                                                <i data-lucide="user-check" class="w-5 h-5"></i> 座長
+                                            </p>
                                             <p class="text-2xl text-tech-text font-bold">江惠英 副部長</p>
                                             <p class="text-tech-textMuted text-base font-medium">奇美醫院護理部</p>
                                         </div>
@@ -534,14 +521,18 @@
                                     <h4 class="text-2xl font-bold text-tech-text mb-6 leading-tight">在教學中找到方法，也找回自己</h4>
                                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                         <div class="bg-white/80 p-5 rounded-2xl border border-violet-50 shadow-sm">
-                                            <p class="text-sm text-tech-secondary font-black tracking-widest mb-4 uppercase flex items-center gap-2"><i data-lucide="mic" class="w-4 h-4"></i> Speakers / 講者</p>
+                                            <p class="text-lg text-tech-secondary font-black tracking-widest mb-4 uppercase flex items-center gap-2">
+                                                <i data-lucide="mic" class="w-5 h-5"></i> 講者
+                                            </p>
                                             <div class="space-y-4">
                                                 <div><p class="text-tech-text font-bold text-xl">余懷瑾 仙女老師</p><p class="text-tech-textMuted text-base font-medium">以人顧問有限公司負責人</p></div>
                                                 <div class="border-t border-slate-100 pt-3"><p class="text-tech-text font-bold text-xl">倪昀安 專員</p><p class="text-tech-textMuted text-base font-medium">台灣費森尤斯卡比</p></div>
                                             </div>
                                         </div>
                                         <div class="bg-white/80 p-5 rounded-2xl border border-violet-50 shadow-sm">
-                                            <p class="text-sm text-tech-primary font-black tracking-widest mb-4 uppercase flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4"></i> Chair / 座長</p>
+                                            <p class="text-lg text-tech-primary font-black tracking-widest mb-4 uppercase flex items-center gap-2">
+                                                <i data-lucide="user-check" class="w-5 h-5"></i> 座長
+                                            </p>
                                             <p class="text-2xl text-tech-text font-bold">蔡長志 主任</p>
                                             <p class="text-tech-textMuted text-base font-medium">奇美醫院臨床技能中心</p>
                                         </div>
@@ -579,7 +570,6 @@
                         <span class="w-8 sm:w-16 h-[2.5px] bg-gradient-to-l from-transparent to-tech-primary"></span>
                     </h3>
                     
-                    <!-- 底色與 LOGO 教學部一致的提醒標籤 -->
                     <div class="mt-4 bg-tech-primary text-white font-bold tracking-[0.2em] px-10 py-3 rounded-2xl shadow-xl border border-sky-500 animate-in fade-in slide-in-from-bottom-4 duration-700">
                         <div class="flex items-center gap-3">
                             <i data-lucide="calendar-clock" class="w-5 h-5 text-sky-100"></i>
@@ -589,19 +579,15 @@
                 </div>
 
                 <div class="max-w-4xl mx-auto">
-                    <!-- 容器設定最小高度 -->
                     <div class="glass-panel rounded-[2.5rem] p-8 lg:p-12 shadow-2xl relative overflow-visible min-h-[600px] flex flex-col justify-center">
-                        
-                        <!-- 裝飾背景 -->
                         <div class="absolute -top-6 -right-6 w-24 h-24 bg-sky-100 rounded-full blur-2xl opacity-50 z-0"></div>
                         <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-violet-100 rounded-full blur-3xl opacity-50 z-0"></div>
 
-                        <!-- 實際表單 -->
                         <form id="registrationForm" class="space-y-8 relative z-10 transition-all duration-300" onsubmit="handleFormSubmit(event)">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
-                                <!-- 姓名 -->
+                                <!-- 姓名: text-lg 加大 -->
                                 <div class="input-group">
-                                    <label class="block text-tech-text font-bold mb-2 ml-1 text-sm transition-colors">姓名</label>
+                                    <label class="block text-tech-text font-bold mb-2 ml-1 text-lg transition-colors">姓名</label>
                                     <div class="relative group">
                                         <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1.5 rounded-lg transition-all group-focus-within:bg-sky-50">
                                             <i data-lucide="user" class="w-5 h-5"></i>
@@ -611,9 +597,9 @@
                                     </div>
                                 </div>
 
-                                <!-- 人事號 -->
+                                <!-- 人事號: text-lg 加大 -->
                                 <div class="input-group">
-                                    <label class="block text-tech-text font-bold mb-2 ml-1 text-sm transition-colors">人事號</label>
+                                    <label class="block text-tech-text font-bold mb-2 ml-1 text-lg transition-colors">人事號</label>
                                     <div class="relative group">
                                         <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1.5 rounded-lg transition-all group-focus-within:bg-sky-50">
                                             <i data-lucide="id-card" class="w-5 h-5"></i>
@@ -623,9 +609,9 @@
                                     </div>
                                 </div>
 
-                                <!-- 院區 -->
+                                <!-- 院區: text-lg 加大 -->
                                 <div class="input-group">
-                                    <label class="block text-tech-text font-bold mb-2 ml-1 text-sm transition-colors">院區</label>
+                                    <label class="block text-tech-text font-bold mb-2 ml-1 text-lg transition-colors">院區</label>
                                     <div class="relative group">
                                         <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1.5 rounded-lg transition-all group-focus-within:bg-sky-50">
                                             <i data-lucide="building" class="w-5 h-5"></i>
@@ -642,9 +628,9 @@
                                     </div>
                                 </div>
 
-                                <!-- 聯繫電話 -->
+                                <!-- 聯繫電話: text-lg 加大 -->
                                 <div class="input-group">
-                                    <label class="block text-tech-text font-bold mb-2 ml-1 text-sm transition-colors">聯繫電話 (分機或簡碼)</label>
+                                    <label class="block text-tech-text font-bold mb-2 ml-1 text-lg transition-colors">聯繫電話 (分機或簡碼)</label>
                                     <div class="relative group">
                                         <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1.5 rounded-lg transition-all group-focus-within:bg-sky-50">
                                             <i data-lucide="phone" class="w-5 h-5"></i>
@@ -654,9 +640,9 @@
                                     </div>
                                 </div>
 
-                                <!-- 職類別 -->
+                                <!-- 職類別: text-lg 加大 -->
                                 <div class="input-group">
-                                    <label class="block text-tech-text font-bold mb-2 ml-1 text-sm transition-colors">職類別</label>
+                                    <label class="block text-tech-text font-bold mb-2 ml-1 text-lg transition-colors">職類別</label>
                                     <div class="relative group">
                                         <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1.5 rounded-lg transition-all group-focus-within:bg-sky-50">
                                             <i data-lucide="briefcase" class="w-5 h-5"></i>
@@ -683,9 +669,9 @@
                                     </div>
                                 </div>
 
-                                <!-- 單位 -->
+                                <!-- 單位: text-lg 加大 -->
                                 <div class="input-group">
-                                    <label class="block text-tech-text font-bold mb-2 ml-1 text-sm transition-colors">單位</label>
+                                    <label class="block text-tech-text font-bold mb-2 ml-1 text-lg transition-colors">單位</label>
                                     <div class="relative group">
                                         <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1.5 rounded-lg transition-all group-focus-within:bg-sky-50">
                                             <i data-lucide="building-2" class="w-5 h-5"></i>
@@ -695,9 +681,9 @@
                                     </div>
                                 </div>
 
-                                <!-- 職稱 -->
+                                <!-- 職稱: text-lg 加大 -->
                                 <div class="input-group">
-                                    <label class="block text-tech-text font-bold mb-2 ml-1 text-sm transition-colors">職稱</label>
+                                    <label class="block text-tech-text font-bold mb-2 ml-1 text-lg transition-colors">職稱</label>
                                     <div class="relative group">
                                         <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1.5 rounded-lg transition-all group-focus-within:bg-sky-50">
                                             <i data-lucide="tag" class="w-5 h-5"></i>
@@ -707,9 +693,9 @@
                                     </div>
                                 </div>
 
-                                <!-- 信箱 -->
+                                <!-- 信箱: text-lg 加大 -->
                                 <div class="input-group">
-                                    <label class="block text-tech-text font-bold mb-2 ml-1 text-sm transition-colors">電子信箱</label>
+                                    <label class="block text-tech-text font-bold mb-2 ml-1 text-lg transition-colors">電子信箱</label>
                                     <div class="relative group">
                                         <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1.5 rounded-lg transition-all group-focus-within:bg-sky-50">
                                             <i data-lucide="mail" class="w-5 h-5"></i>
@@ -729,23 +715,20 @@
                             </div>
                         </form>
 
-                        <!-- 提交成功訊息 -->
                         <div id="successMessage" class="hidden relative z-10 flex-col items-center justify-center text-center py-10 animate-in fade-in zoom-in duration-500">
                             <div class="w-24 h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-8 mx-auto shadow-sm">
                                 <i data-lucide="check-circle" class="w-14 h-14"></i>
                             </div>
                             <h4 class="text-4xl font-black text-tech-text mb-6">報名成功！</h4>
-                            <div class="space-y-2 text-tech-textMuted text-xl max-w-lg mx-auto leading-relaxed">
-                                <p>我們已收到您的報名</p>
-                                <p>將於課程前兩周再提醒您</p>
-                                <p>請留意收信</p>
+                            <div class="space-y-4 text-tech-textMuted text-xl max-w-lg mx-auto leading-relaxed px-4">
+                                <p>我們已收到您的報名，感謝您的參與。</p>
+                                <p>將於課程開始前兩週再次寄發提醒通知，敬請留意信件，謝謝。</p>
                             </div>
-                            <button onclick="resetForm()" class="mt-12 bg-slate-50 hover:bg-white border border-slate-200 text-tech-primary font-bold px-8 py-3 rounded-xl transition-all flex items-center gap-2 mx-auto">
-                                <i data-lucide="arrow-left" class="w-5 h-5"></i> 填寫另一份報名表
-                            </button>
+                            <a href="#agenda" onclick="resetForm()" class="mt-12 bg-slate-50 hover:bg-white border border-slate-200 text-tech-primary font-bold px-8 py-3 rounded-xl transition-all flex items-center gap-2 mx-auto">
+                                <i data-lucide="calendar-days" class="w-5 h-5"></i> 回到議程
+                            </a>
                         </div>
 
-                        <!-- 錯誤訊息彈窗 -->
                         <div id="errorMessage" class="hidden fixed bottom-10 left-1/2 -translate-x-1/2 bg-red-600 text-white px-6 py-3 rounded-xl shadow-2xl z-[100] animate-bounce">
                             傳送失敗，請稍後再試。
                         </div>
@@ -793,32 +776,20 @@
 
     <script>
         lucide.createIcons();
-
-        // 🚀 Google Apps Script URL
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwtIqkomcWdavGzgapoAZscTID-LOwanETcambFaQ3m2FyJOxBu5CZ8khuTTcsnqrruAw/exec';
         
-        // 115年5月16日 倒數計時邏輯 (2026-05-16)
         function updateCountdown() {
             const targetDate = new Date('2026-05-16');
             const today = new Date();
             today.setHours(0, 0, 0, 0);
-            
             const diffTime = targetDate - today;
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            
             const countEl = document.getElementById('days-count');
             const container = document.getElementById('countdown-container');
-            
             if (diffDays > 0) {
                 countEl.innerText = diffDays;
             } else if (diffDays === 0) {
-                container.innerHTML = `
-                    <span class="relative flex h-3 w-3">
-                        <span class="animate-ping-slow absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
-                    </span>
-                    <span class="text-red-600 font-black text-lg tracking-widest">就是今天！期待您的蒞臨</span>
-                `;
+                container.innerHTML = `<span class="relative flex h-3 w-3"><span class="animate-ping-slow absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span><span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span></span><span class="text-red-600 font-black text-lg tracking-widest">就是今天！期待您的蒞臨</span>`;
             } else {
                 container.classList.add('hidden');
             }
@@ -826,32 +797,22 @@
         updateCountdown();
 
         const backToTopBtn = document.getElementById('backToTopBtn');
-
         window.addEventListener('scroll', () => {
             let current = "";
             const sections = document.querySelectorAll('section');
             const dots = document.querySelectorAll('.side-indicator-dot');
-            
             sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (window.pageYOffset >= (sectionTop - 300)) current = section.getAttribute('id');
+                if (window.pageYOffset >= (section.offsetTop - 300)) current = section.getAttribute('id');
             });
-            
             dots.forEach(dot => {
                 dot.classList.remove('active');
                 if (dot.getAttribute('href').includes(current)) dot.classList.add('active');
             });
-
-            if (window.pageYOffset > 500) {
-                backToTopBtn.classList.add('show');
-            } else {
-                backToTopBtn.classList.remove('show');
-            }
+            if (window.pageYOffset > 500) backToTopBtn.classList.add('show');
+            else backToTopBtn.classList.remove('show');
         });
 
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
         async function handleFormSubmit(e) {
             e.preventDefault();
@@ -859,13 +820,10 @@
             const success = document.getElementById('successMessage');
             const errorMsg = document.getElementById('errorMessage');
             const btn = form.querySelector('button');
-            
             btn.innerHTML = '<i data-lucide="loader-2" class="w-6 h-6 animate-spin"></i><span>資料傳送中...</span>';
             lucide.createIcons();
             btn.disabled = true;
-
             const formData = new FormData(form);
-
             try {
                 await fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors' });
                 form.classList.add('hidden');
@@ -874,7 +832,6 @@
                 lucide.createIcons();
                 document.getElementById('registration').scrollIntoView({ behavior: 'smooth' });
             } catch (error) {
-                console.error('Submission Error:', error);
                 btn.disabled = false;
                 btn.innerHTML = '<i data-lucide="send" class="w-6 h-6"></i><span>送出報名資訊</span>';
                 lucide.createIcons();
