@@ -35,6 +35,7 @@
                         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                         'float': 'float 6s ease-in-out infinite',
                         'spin-slow': 'spin 12s linear infinite',
+                        'ping-slow': 'ping 2s cubic-bezier(0, 0, 0.2, 1) infinite',
                     },
                     keyframes: {
                         float: {
@@ -47,22 +48,25 @@
         }
     </script>
     <style>
-        /* === Block Scrolling Core === */
+        /* === 修正捲動對齊與視覺置中邏輯 === */
+        html { 
+            /* 設定捲動補償高度，對應導航列的 80px */
+            scroll-padding-top: 80px; 
+        }
+
         @media (min-width: 1024px) {
-            html {
-                scroll-snap-type: y mandatory;
-            }
             .section-block {
-                scroll-snap-align: start;
+                /* 每個區塊佔據完整視窗高度 */
                 min-height: 100vh;
                 display: flex;
                 flex-direction: column;
+                /* 確保內容在「扣除 Header 後的空間」內置中 */
                 justify-content: center;
-                padding-top: 80px;
+                /* 關鍵補償：加上 Header 的高度，防止內容被遮擋並修正視覺中心 */
+                padding-top: 80px; 
+                padding-bottom: 2rem;
             }
         }
-
-        html { scroll-padding-top: 100px; }
 
         body {
             background-color: #f8fafc;
@@ -132,6 +136,13 @@
             background-color: #e0f2fe;
             color: #0284c7;
         }
+
+        /* 至頂按鈕顯示動畫 */
+        #backToTopBtn.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body class="antialiased min-h-screen relative">
@@ -184,6 +195,17 @@
         <!-- 第一區塊: Hero -->
         <section id="hero" class="section-block mb-24 lg:mb-0">
             <div class="text-center animate-float w-full">
+                <!-- 倒數計時顯示區 -->
+                <div id="countdown-container" class="mb-6 inline-flex items-center gap-2.5 bg-white/60 backdrop-blur-md border border-sky-100 px-5 py-2 rounded-full shadow-sm">
+                    <span class="relative flex h-3 w-3">
+                        <span class="animate-ping-slow absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
+                    </span>
+                    <span class="text-tech-textMuted font-bold text-sm sm:text-base tracking-widest">
+                        距離研討會還有 <span id="days-count" class="text-tech-primary font-black text-xl">--</span> 天
+                    </span>
+                </div>
+
                 <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[4.5rem] font-black mb-6 sm:mb-8 tracking-wide sm:tracking-wider pb-2 text-tech-primary leading-tight">
                     教師教學成長與培育研討會
                 </h1>
@@ -325,9 +347,12 @@
                         </div>
 
                         <!-- 名額標示 -->
-                        <div class="mt-8 pt-6 border-t border-slate-100 flex items-center justify-center">
+                        <div class="mt-8 pt-6 border-t border-slate-100 flex flex-col items-center justify-center gap-2">
                             <div class="bg-tech-primary text-white px-8 py-2.5 rounded-full text-lg font-black shadow-lg shadow-tech-primary/30 animate-pulse">
-                                限量 150 名
+                                限額 150 名
+                            </div>
+                            <div class="text-tech-primary font-bold text-sm tracking-widest mt-1">
+                                報名至 5 月 4 日(一)或額滿截止
                             </div>
                         </div>
                     </div>
@@ -503,13 +528,17 @@
                         報名表單
                         <span class="w-8 sm:w-16 h-[2.5px] bg-gradient-to-l from-transparent to-tech-primary"></span>
                     </h3>
+                    <!-- 新增報名期限提示 -->
+                    <div class="text-tech-primary/80 font-bold tracking-widest mt-2 bg-sky-50 px-6 py-1.5 rounded-full border border-sky-100 shadow-sm">
+                        報名至 5 月 4 日(一)或額滿截止
+                    </div>
                 </div>
 
                 <div class="max-w-4xl mx-auto">
-                    <!-- 容器設定最小高度，防止內容切換時高度塌陷 -->
-                    <div class="glass-panel rounded-[2.5rem] p-8 lg:p-12 shadow-2xl relative overflow-visible min-h-[500px] flex flex-col justify-center">
+                    <!-- 容器設定最小高度 -->
+                    <div class="glass-panel rounded-[2.5rem] p-8 lg:p-12 shadow-2xl relative overflow-visible min-h-[600px] flex flex-col justify-center">
                         
-                        <!-- 裝飾背景 (固定在容器內部) -->
+                        <!-- 裝飾背景 -->
                         <div class="absolute -top-6 -right-6 w-24 h-24 bg-sky-100 rounded-full blur-2xl opacity-50 z-0"></div>
                         <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-violet-100 rounded-full blur-3xl opacity-50 z-0"></div>
 
@@ -525,6 +554,37 @@
                                         </div>
                                         <input type="text" name="name" required placeholder="請輸入真實姓名" 
                                             class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-2xl py-3.5 pl-14 pr-4 text-tech-text outline-none transition-all placeholder:text-slate-300">
+                                    </div>
+                                </div>
+
+                                <!-- 人事號 -->
+                                <div class="input-group">
+                                    <label class="block text-tech-text font-bold mb-2 ml-1 text-sm transition-colors">人事號</label>
+                                    <div class="relative group">
+                                        <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1.5 rounded-lg transition-all group-focus-within:bg-sky-50">
+                                            <i data-lucide="id-card" class="w-5 h-5"></i>
+                                        </div>
+                                        <input type="text" name="employeeId" required placeholder="請輸入人事編號" 
+                                            class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-2xl py-3.5 pl-14 pr-4 text-tech-text outline-none transition-all placeholder:text-slate-300">
+                                    </div>
+                                </div>
+
+                                <!-- 院區 -->
+                                <div class="input-group">
+                                    <label class="block text-tech-text font-bold mb-2 ml-1 text-sm transition-colors">院區</label>
+                                    <div class="relative group">
+                                        <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1.5 rounded-lg transition-all group-focus-within:bg-sky-50">
+                                            <i data-lucide="building" class="w-5 h-5"></i>
+                                        </div>
+                                        <select name="campus" required class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-2xl py-3.5 pl-14 pr-4 text-tech-text outline-none transition-all appearance-none">
+                                            <option value="" disabled selected>請選擇院區</option>
+                                            <option value="總院">總院</option>
+                                            <option value="柳營">柳營</option>
+                                            <option value="佳里">佳里</option>
+                                        </select>
+                                        <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+                                            <i data-lucide="chevron-down" class="w-5 h-5"></i>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -597,206 +657,4 @@
                                 <div class="input-group">
                                     <label class="block text-tech-text font-bold mb-2 ml-1 text-sm transition-colors">電子信箱</label>
                                     <div class="relative group">
-                                        <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1.5 rounded-lg transition-all group-focus-within:bg-sky-50">
-                                            <i data-lucide="mail" class="w-5 h-5"></i>
-                                        </div>
-                                        <input type="email" name="email" required placeholder="用於寄送報名確認函" 
-                                            class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-2xl py-3.5 pl-14 pr-4 text-tech-text outline-none transition-all placeholder:text-slate-300">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="pt-6">
-                                <button type="submit" 
-                                    class="w-full bg-gradient-to-r from-tech-primary to-tech-secondary hover:from-sky-500 hover:to-violet-500 text-white font-black py-4 rounded-2xl shadow-xl shadow-sky-200 transition-all duration-300 transform hover:-translate-y-1 active:scale-[0.98] flex items-center justify-center gap-3 text-lg">
-                                    <i data-lucide="send" class="w-6 h-6"></i>
-                                    <span>送出報名資訊</span>
-                                </button>
-                            </div>
-                        </form>
-
-                        <!-- 提交成功訊息 (優化排版) -->
-                        <div id="successMessage" class="hidden relative z-10 flex-col items-center justify-center text-center py-10 animate-in fade-in zoom-in duration-500">
-                            <div class="w-24 h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-8 mx-auto shadow-sm">
-                                <i data-lucide="check-circle" class="w-14 h-14"></i>
-                            </div>
-                            <h4 class="text-4xl font-black text-tech-text mb-6">報名成功！</h4>
-                            <div class="space-y-2 text-tech-textMuted text-xl max-w-lg mx-auto leading-relaxed">
-                                <p>我們已收到您的報名</p>
-                                <p>將於課程前兩周再提醒您</p>
-                                <p>請留意收信</p>
-                            </div>
-                            <button onclick="resetForm()" class="mt-12 bg-slate-50 hover:bg-white border border-slate-200 text-tech-primary font-bold px-8 py-3 rounded-xl transition-all flex items-center gap-2 mx-auto">
-                                <i data-lucide="arrow-left" class="w-5 h-5"></i> 填寫另一份報名表
-                            </button>
-                        </div>
-
-                        <!-- 錯誤訊息彈窗 -->
-                        <div id="errorMessage" class="hidden fixed bottom-10 left-1/2 -translate-x-1/2 bg-red-600 text-white px-6 py-3 rounded-xl shadow-2xl z-[100] animate-bounce">
-                            傳送失敗，請稍後再試。
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 第六區塊: 聯絡資訊 -->
-        <section id="contact" class="section-block mb-12">
-            <div class="w-full max-w-4xl mx-auto">
-                <div class="glass-panel rounded-[2.5rem] p-[1.5px] bg-gradient-to-r from-sky-300 via-cyan-300 to-violet-300 shadow-2xl shadow-sky-100/50">
-                    <div class="bg-white rounded-[2.4rem] p-8 sm:p-12 flex flex-col sm:flex-row items-center sm:items-start md:items-center justify-between gap-8 text-center sm:text-left">
-                        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6">
-                            <div class="w-20 h-20 rounded-3xl bg-sky-50 flex items-center justify-center text-tech-primary border border-sky-100 shrink-0">
-                                <i data-lucide="headset" class="w-10 h-10"></i>
-                            </div>
-                            <div class="space-y-3 text-left">
-                                <p class="text-tech-text font-bold text-xl lg:text-2xl">有任何疑問？請聯繫我們</p>
-                                <p class="text-tech-textMuted text-base lg:text-lg font-medium">主辦：奇美醫療財團法人奇美醫院教學部</p>
-                                <p class="text-tech-textMuted text-base lg:text-lg font-medium">聯絡人：陳詩芸 教學行政管理員</p>
-                            </div>
-                        </div>
-                        <div class="space-y-4 flex flex-col items-center sm:items-start w-full sm:w-auto mt-4 sm:mt-0 font-bold">
-                            <a href="tel:062812811,57439" class="flex items-center gap-3 text-tech-textMuted hover:text-tech-primary hover:bg-sky-50 transition-all px-6 py-4 rounded-2xl border border-slate-100 w-full justify-center">
-                                <i data-lucide="phone" class="w-5 h-5 text-slate-400"></i>
-                                06-281-2811 分機 57439
-                            </a>
-                            <a href="mailto:b20715@mail.chimei.org.tw" class="flex items-center gap-3 text-tech-textMuted hover:text-tech-primary hover:bg-sky-50 transition-all px-6 py-4 rounded-2xl border border-slate-100 w-full justify-center">
-                                <i data-lucide="mail" class="w-5 h-5 text-slate-400"></i>
-                                b20715@mail.chimei.org.tw
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </div>
-
-    <script>
-        lucide.createIcons();
-
-        // 🚀 已填入您的 Google Apps Script 網頁應用程式 URL
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbwtIqkomcWdavGzgapoAZscTID-LOwanETcambFaQ3m2FyJOxBu5CZ8khuTTcsnqrruAw/exec';
-        
-        // 更新側邊導航點狀態
-        const sections = document.querySelectorAll('section');
-        const dots = document.querySelectorAll('.side-indicator-dot');
-        window.addEventListener('scroll', () => {
-            let current = "";
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (pageYOffset >= (sectionTop - 300)) current = section.getAttribute('id');
-            });
-            dots.forEach(dot => {
-                dot.classList.remove('active');
-                if (dot.getAttribute('href').includes(current)) dot.classList.add('active');
-            });
-        });
-
-        // 表單提交處理
-        async function handleFormSubmit(e) {
-            e.preventDefault();
-            const form = document.getElementById('registrationForm');
-            const success = document.getElementById('successMessage');
-            const errorMsg = document.getElementById('errorMessage');
-            const btn = form.querySelector('button');
-            
-            // UI 回饋：按鈕進入載入狀態
-            btn.innerHTML = '<i data-lucide="loader-2" class="w-6 h-6 animate-spin"></i><span>資料傳送中...</span>';
-            lucide.createIcons();
-            btn.disabled = true;
-
-            const formData = new FormData(form);
-
-            try {
-                // 發送資料至 Google Apps Script
-                await fetch(scriptURL, { 
-                    method: 'POST', 
-                    body: formData,
-                    mode: 'no-cors' 
-                });
-
-                // 顯示成功介面：改為切換 hidden 而非絕對定位
-                form.classList.add('hidden');
-                success.classList.remove('hidden');
-                success.classList.add('flex'); // 確保使用彈性佈局置中
-                lucide.createIcons();
-                
-                // 平滑捲動回表單頂部確保看到成功訊息
-                document.getElementById('registration').scrollIntoView({ behavior: 'smooth' });
-
-            } catch (error) {
-                console.error('Submission Error:', error);
-                btn.disabled = false;
-                btn.innerHTML = '<i data-lucide="send" class="w-6 h-6"></i><span>送出報名資訊</span>';
-                lucide.createIcons();
-                
-                // 顯示錯誤回饋
-                errorMsg.classList.remove('hidden');
-                setTimeout(() => errorMsg.classList.add('hidden'), 5000);
-            }
-        }
-
-        function resetForm() {
-            const form = document.getElementById('registrationForm');
-            const success = document.getElementById('successMessage');
-            form.reset();
-            form.classList.remove('hidden');
-            success.classList.add('hidden');
-            success.classList.remove('flex');
-            const btn = form.querySelector('button');
-            btn.disabled = false;
-            btn.innerHTML = '<i data-lucide="send" class="w-6 h-6"></i><span>送出報名資訊</span>';
-            lucide.createIcons();
-        }
-
-        // 粒子背景動畫
-        const canvas = document.getElementById('particleCanvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        let w, h;
-        function resize() {
-            w = canvas.width = window.innerWidth;
-            h = canvas.height = window.innerHeight;
-            initParticles();
-        }
-        window.addEventListener('resize', resize);
-        class Particle {
-            constructor() {
-                this.x = Math.random() * w; this.y = Math.random() * h;
-                this.vx = (Math.random() - 0.5) * 0.7; this.vy = (Math.random() - 0.5) * 0.7;
-                this.radius = 1.5;
-            }
-            update() {
-                this.x += this.vx; this.y += this.vy;
-                if (this.x < 0 || this.x > w) this.vx *= -1;
-                if (this.y < 0 || this.y > h) this.vy *= -1;
-            }
-            draw() {
-                ctx.beginPath(); ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(14, 165, 233, 0.4)'; ctx.fill();
-            }
-        }
-        function initParticles() {
-            particles = [];
-            let numParticles = Math.min(Math.floor((w * h) / 10000), 100);
-            for (let i = 0; i < numParticles; i++) particles.push(new Particle());
-        }
-        function animate() {
-            ctx.clearRect(0, 0, w, h);
-            particles.forEach((p, i) => {
-                p.update(); p.draw();
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = p.x - particles[j].x, dy = p.y - particles[j].y, dist = Math.sqrt(dx*dx + dy*dy);
-                    if (dist < 150) {
-                        ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(14, 165, 233, ${(1 - dist/150) * 0.25})`; ctx.lineWidth = 1; ctx.stroke();
-                    }
-                }
-            });
-            requestAnimationFrame(animate);
-        }
-        resize(); animate();
-    </script>
-</body>
-</html>
+                                        <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1.5 rounded-lg transition-all group-focus-within
