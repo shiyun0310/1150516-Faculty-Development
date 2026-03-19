@@ -54,14 +54,12 @@
         }
     </script>
     <style>
-        /* 全域捲動補償，預設為 80px (導航列高度) */
         html { 
             scroll-padding-top: 80px; 
         }
 
-        /* 響應式區塊高度與置中設定 */
         .section-block {
-            min-height: auto; /* 手機版自動高度，避免內容過長被截斷 */
+            min-height: auto; 
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -170,7 +168,7 @@
         <a href="#contact" class="side-indicator-dot" title="聯絡資訊"></a>
     </div>
 
-    <!-- 導航列：針對行動版優化間距與大小 -->
+    <!-- 導航列 -->
     <nav class="fixed top-0 w-full z-50 glass-nav transition-all duration-300 h-16 lg:h-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
             <div class="flex items-center justify-between h-full">
@@ -183,8 +181,7 @@
                             onerror="this.onerror=null; this.parentElement.innerHTML='<i data-lucide=\'cpu\' class=\'text-tech-primary w-5 h-5\'></i>'; lucide.createIcons();"
                         >
                     </div>
-                    <span class="hidden xs:inline">奇美醫院<span class="text-tech-primary">教學部</span></span>
-                    <span class="xs:hidden">奇美<span class="text-tech-primary">教學部</span></span>
+                    <span class="inline">奇美醫院<span class="text-tech-primary">教學部</span></span>
                 </a>
                 
                 <div class="flex items-center gap-3 lg:gap-10">
@@ -219,7 +216,6 @@
                     </span>
                 </div>
 
-                <!-- 手機版縮小字體 text-3xl -->
                 <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[4.5rem] font-black mb-6 sm:mb-8 tracking-tight lg:tracking-wider pb-2 text-tech-primary leading-tight">
                     教師教學成長與培育研討會
                 </h1>
@@ -285,7 +281,6 @@
         <section id="core-concept" class="section-block scroll-mt-0">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center w-full">
                 <div class="lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left">
-                    <!-- 手機版縮小裝飾圖形 -->
                     <div class="relative w-40 h-40 sm:w-56 sm:h-56 lg:w-72 lg:h-72 mb-8 flex items-center justify-center animate-float">
                         <div class="absolute inset-0 border-2 border-tech-primary/30 rounded-full animate-spin-slow"></div>
                         <div class="absolute inset-8 lg:inset-10 border-2 border-tech-secondary/30 rounded-full animate-spin-reverse"></div>
@@ -714,7 +709,7 @@
                             </div>
                         </form>
 
-                        <!-- 修正：成功訊息內容與按鈕文字 -->
+                        <!-- 報名成功訊息 -->
                         <div id="successMessage" class="hidden relative z-10 flex-col items-center justify-center text-center py-6 lg:py-10 animate-in fade-in zoom-in duration-500">
                             <div class="w-16 h-16 lg:w-24 lg:h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-6 lg:mb-8 mx-auto shadow-sm">
                                 <i data-lucide="check-circle" class="w-10 h-10 lg:w-14 lg:h-14"></i>
@@ -725,8 +720,8 @@
                                 <p>將於課程開始前兩週再次寄發提醒通知</p>
                                 <p>敬請留意信件，謝謝！</p>
                             </div>
-                            <a href="#agenda" onclick="resetForm()" class="mt-8 lg:mt-12 bg-slate-50 hover:bg-white border border-slate-200 text-tech-primary font-bold px-6 py-2.5 lg:px-8 lg:py-3 rounded-xl transition-all flex items-center gap-2 mx-auto text-sm lg:text-base">
-                                <i data-lucide="calendar-days" class="w-4 h-4"></i> 回到研討會網頁
+                            <a href="#hero" onclick="resetForm()" class="mt-8 lg:mt-12 bg-slate-50 hover:bg-white border border-slate-200 text-tech-primary font-bold px-6 py-2.5 lg:px-8 lg:py-3 rounded-xl transition-all flex items-center gap-2 mx-auto text-sm lg:text-base">
+                                <i data-lucide="home" class="w-4 h-4"></i> 回到研討會首頁
                             </a>
                         </div>
 
@@ -738,30 +733,65 @@
             </div>
         </section>
 
-        <!-- 聯絡資訊 -->
+        <!-- 第六區塊: 聯絡資訊 -->
         <section id="contact" class="section-block mb-12 scroll-mt-0">
             <div class="w-full max-w-4xl mx-auto">
                 <div class="glass-panel rounded-2xl lg:rounded-[2.5rem] p-[1.5px] bg-gradient-to-r from-sky-300 via-cyan-300 to-violet-300 shadow-2xl shadow-sky-100/50">
-                    <div class="bg-white rounded-[2.4rem] p-6 lg:p-12 flex flex-col lg:flex-row items-center lg:items-center justify-between gap-6 lg:gap-8 text-center lg:text-left">
-                        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-4 lg:gap-6">
-                            <div class="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl lg:rounded-3xl bg-sky-50 flex items-center justify-center text-tech-primary border border-sky-100 shrink-0">
+                    <div class="bg-white rounded-[2.4rem] p-6 lg:p-10 flex flex-col items-center justify-between gap-8">
+                        <!-- 標題與裝飾 -->
+                        <div class="flex flex-col items-center gap-4 text-center">
+                            <div class="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl lg:rounded-3xl bg-sky-50 flex items-center justify-center text-tech-primary border border-sky-100 shrink-0 shadow-inner">
                                 <i data-lucide="headset" class="w-8 h-8 lg:w-10 lg:h-10"></i>
                             </div>
-                            <div class="space-y-2 text-center sm:text-left">
-                                <p class="text-tech-text font-bold text-lg lg:text-2xl">聯絡資訊</p>
-                                <p class="text-tech-textMuted text-sm lg:text-lg font-medium">主辦：奇美醫療財團法人奇美醫院教學部</p>
-                                <p class="text-tech-textMuted text-sm lg:text-lg font-medium">聯絡窗口：陳詩芸 教學行政管理員</p>
-                            </div>
+                            <h4 class="text-2xl lg:text-3xl font-black text-tech-text tracking-widest">聯絡資訊</h4>
                         </div>
-                        <div class="space-y-3 flex flex-col items-center lg:items-start w-full lg:w-auto font-bold text-sm lg:text-base">
-                            <a href="tel:062812811,57439" class="flex items-center gap-3 text-tech-textMuted hover:text-tech-primary hover:bg-sky-50 transition-all px-5 py-3 lg:px-6 lg:py-4 rounded-xl lg:rounded-2xl border border-slate-100 w-full justify-center lg:justify-start">
-                                <i data-lucide="phone" class="w-4 h-4 text-slate-400"></i>
-                                06-281-2811 分機 57439
-                            </a>
-                            <a href="mailto:b20715@mail.chimei.org.tw" class="flex items-center gap-3 text-tech-textMuted hover:text-tech-primary hover:bg-sky-50 transition-all px-5 py-3 lg:px-6 lg:py-4 rounded-xl lg:rounded-2xl border border-slate-100 w-full justify-center lg:justify-start">
-                                <i data-lucide="mail" class="w-4 h-4 text-slate-400"></i>
-                                b20715@mail.chimei.org.tw
-                            </a>
+
+                        <!-- 資訊條目 -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+                            <!-- 主辦與主持 -->
+                            <div class="space-y-6">
+                                <div class="flex items-start gap-4">
+                                    <div class="mt-1 bg-sky-50 p-2 rounded-lg text-tech-primary"><i data-lucide="building-2" class="w-5 h-5"></i></div>
+                                    <div class="text-left">
+                                        <p class="text-tech-textMuted text-xs font-black uppercase tracking-widest mb-1">主辦單位</p>
+                                        <p class="text-tech-text font-bold text-base lg:text-lg">奇美醫療財團法人奇美醫院教學部</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div class="mt-1 bg-violet-50 p-2 rounded-lg text-tech-secondary"><i data-lucide="mic" class="w-5 h-5"></i></div>
+                                    <div class="text-left">
+                                        <p class="text-tech-textMuted text-xs font-black uppercase tracking-widest mb-1">主持人</p>
+                                        <p class="text-tech-text font-bold text-base lg:text-lg leading-snug">
+                                            教學部醫事訓練組 執行秘書<br>
+                                            <span class="text-tech-text">黃建中 總技師</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 聯繫窗口 -->
+                            <div class="space-y-4">
+                                <div class="bg-slate-50/50 border border-slate-100 p-5 rounded-2xl space-y-4">
+                                    <div class="flex items-center gap-3">
+                                        <div class="bg-white p-2 rounded-lg shadow-sm text-tech-accent"><i data-lucide="user" class="w-5 h-5"></i></div>
+                                        <div>
+                                            <p class="text-tech-textMuted text-[10px] font-black uppercase tracking-widest">聯絡窗口</p>
+                                            <p class="text-tech-text font-bold text-base lg:text-lg">陳詩芸 教學行政管理員</p>
+                                        </div>
+                                    </div>
+                                    <div class="h-[1px] bg-slate-200/50 w-full"></div>
+                                    <div class="space-y-3">
+                                        <a href="tel:062812811,57439" class="flex items-center gap-3 text-tech-textMuted hover:text-tech-primary transition-colors font-bold text-sm lg:text-base">
+                                            <i data-lucide="phone" class="w-4 h-4 opacity-60"></i>
+                                            06-281-2811 分機 57439
+                                        </a>
+                                        <a href="mailto:b20715@mail.chimei.org.tw" class="flex items-center gap-3 text-tech-textMuted hover:text-tech-primary transition-colors font-bold text-sm lg:text-base break-all">
+                                            <i data-lucide="mail" class="w-4 h-4 opacity-60"></i>
+                                            b20715@mail.chimei.org.tw
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -770,7 +800,7 @@
 
     </div>
 
-    <!-- 回到至頂按鈕：針對手機版調整大小 -->
+    <!-- 回到至頂按鈕 -->
     <button id="backToTopBtn" onclick="scrollToTop()" class="fixed bottom-6 right-6 z-[60] w-12 h-12 lg:w-14 lg:h-14 bg-white/80 backdrop-blur-md border border-sky-100 text-tech-primary rounded-full shadow-xl shadow-sky-200/50 flex items-center justify-center opacity-0 invisible translate-y-4 transition-all duration-300 hover:bg-tech-primary hover:text-white group">
         <i data-lucide="chevron-up" class="w-6 h-6 lg:w-7 lg:h-7 transition-transform group-hover:-translate-y-1"></i>
     </button>
