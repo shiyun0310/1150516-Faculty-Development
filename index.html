@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>教師教學成長與培育研討會 | 奇美醫院</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Inter"', '"Noto Sans TC"', 'sans-serif'],
+                        tech: ['"Inter"', 'sans-serif'],
+                    },
+                    colors: {
+                        tech: {
+                            bg: '#f8fafc',      // Slate 50
+                            panel: '#ffffff',
+                            primary: '#0284c7', // Sky 600
+                            primaryLight: '#38bdf8', // Sky 400
+                            secondary: '#7c3aed', // Violet 600
+                            accent: '#0891b2', // Cyan 600
+                            text: '#0f172a',    // Slate 900
+                            textMuted: '#475569'// Slate 600
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'spin-slow': 'spin 12s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* === Block Scrolling Core === */
+        @media (min-width: 1024px) {
+            html {
+                scroll-snap-type: y mandatory;
+            }
+            .section-block {
+                scroll-snap-align: start;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding-top: 80px;
+            }
+        }
+
+        html { scroll-padding-top: 100px; }
+
+        body {
+            background-color: #f8fafc;
+            color: #0f172a;
+            background-image: 
+                linear-gradient(to right, rgba(14, 165, 233, 0.08) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(14, 165, 233, 0.08) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(14, 165, 233, 0.1);
+            box-shadow: 0 4px 20px rgba(14, 165, 233, 0.03);
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 32px rgba(14, 165, 233, 0.06);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .tech-text-gradient {
+            background: linear-gradient(135deg, #0284c7, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+        }
+
+        .glow-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(90px);
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        #particleCanvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .side-indicator-dot {
+            width: 10px; height: 10px; border-radius: 50%;
+            background: #cbd5e1; transition: all 0.3s ease; cursor: pointer;
+        }
+        .side-indicator-dot.active {
+            background: #0284c7; transform: scale(1.5); box-shadow: 0 0 10px rgba(2, 132, 199, 0.4);
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen relative">
+
+    <canvas id="particleCanvas"></canvas>
+
+    <div class="glow-orb bg-sky-200 w-96 h-96 top-0 left-0 animate-pulse-slow"></div>
+    <div class="glow-orb bg-violet-200 w-[30rem] h-[30rem] top-1/2 right-0 -translate-y-1/2 animate-pulse-slow" style="animation-delay: 2s;"></div>
+    <div class="glow-orb bg-cyan-200 w-80 h-80 bottom-0 left-1/4 animate-pulse-slow" style="animation-delay: 1s;"></div>
+
+    <!-- 側邊導航點 -->
+    <div class="fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col gap-5 p-3 rounded-full bg-white/30 backdrop-blur-sm border border-white/50">
+        <a href="#hero" class="side-indicator-dot" title="首頁"></a>
+        <a href="#core-concept" class="side-indicator-dot" title="核心理念"></a>
+        <a href="#details" class="side-indicator-dot" title="詳細內容"></a>
+        <a href="#agenda" class="side-indicator-dot" title="活動議程"></a>
+        <a href="#contact" class="side-indicator-dot" title="聯絡資訊"></a>
+    </div>
+
+    <!-- 導航列 -->
+    <nav class="fixed top-0 w-full z-50 glass-nav transition-all duration-300 h-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+            <div class="flex items-center justify-between h-full">
+                <a href="#hero" class="flex items-center gap-2 text-tech-text font-black text-xl tracking-wider shrink-0">
+                    <i data-lucide="cpu" class="text-tech-primary w-7 h-7"></i>
+                    <span>奇美醫院<span class="text-tech-primary">教學部</span></span>
+                </a>
+                
+                <div class="flex items-center gap-6 lg:gap-10">
+                    <div class="hidden lg:flex items-center space-x-8 text-sm xl:text-base">
+                        <a href="#core-concept" class="text-tech-textMuted hover:text-tech-primary font-bold tracking-wide transition-colors">核心理念</a>
+                        <a href="#details" class="text-tech-textMuted hover:text-tech-primary font-bold tracking-wide transition-colors">詳細內容</a>
+                        <a href="#agenda" class="text-tech-textMuted hover:text-tech-primary font-bold tracking-wide transition-colors">活動議程</a>
+                        <a href="#contact" class="text-tech-textMuted hover:text-tech-primary font-bold tracking-wide transition-colors">聯絡資訊</a>
+                    </div>
+                    <div class="shrink-0">
+                        <a href="#" class="inline-block bg-gradient-to-r from-tech-primary to-tech-secondary hover:from-sky-500 hover:to-violet-500 text-white font-bold py-2.5 px-6 sm:px-8 rounded-full shadow-[0_4px_15px_rgba(2,132,199,0.3)] transition-all duration-300 transform hover:-translate-y-0.5">
+                            立即報名
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主容器 -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- 第一區塊: Hero -->
+        <section id="hero" class="section-block mb-24 lg:mb-0">
+            <div class="text-center animate-float w-full">
+                <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[4.5rem] font-black mb-6 sm:mb-8 tracking-wide sm:tracking-wider pb-2 text-tech-primary leading-tight">
+                    教師教學成長與培育研討會
+                </h1>
+                <h2 class="text-lg sm:text-xl md:text-2xl text-tech-primary font-bold tracking-widest flex items-center justify-center gap-2 sm:gap-4 md:gap-6 mb-16">
+                    <span class="w-8 sm:w-12 md:w-24 h-[2px] bg-gradient-to-r from-transparent to-tech-primary/60"></span>
+                    ~ 教學不該這麼累 ~
+                    <span class="w-8 sm:w-12 md:w-24 h-[2px] bg-gradient-to-l from-transparent to-tech-primary/60"></span>
+                </h2>
+
+                <div class="flex flex-col md:flex-row justify-center gap-4 sm:gap-6 max-w-4xl mx-auto">
+                    <div class="glass-panel rounded-2xl p-6 flex items-center gap-5 w-full md:w-1/2 hover:bg-white/80">
+                        <div class="p-3.5 bg-sky-50 rounded-xl border border-sky-100">
+                            <i data-lucide="calendar" class="text-tech-primary w-7 h-7"></i>
+                        </div>
+                        <div class="text-left">
+                            <div class="text-tech-textMuted text-xs sm:text-sm font-bold mb-1">活動日期</div>
+                            <div class="text-tech-text font-black text-lg sm:text-xl tracking-wide">115年5月16日 (六)</div>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel rounded-2xl p-6 flex items-center gap-5 w-full md:w-1/2 hover:bg-white/80">
+                        <div class="p-3.5 bg-cyan-50 rounded-xl border border-cyan-100">
+                            <i data-lucide="map-pin" class="text-tech-accent w-7 h-7"></i>
+                        </div>
+                        <div class="text-left overflow-hidden">
+                            <div class="text-tech-textMuted text-xs sm:text-sm font-bold mb-1">活動地點</div>
+                            <div class="text-tech-text font-black text-base sm:text-lg lg:text-xl tracking-wide leading-tight">
+                                奇美醫院第五醫療大樓<span class="whitespace-nowrap">5樓國際會議廳</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mt-10">
+                    <a href="#core-concept" class="group flex items-center justify-center gap-2 bg-white text-tech-textMuted border-2 border-slate-200 hover:border-tech-primary hover:text-tech-primary font-bold py-3 sm:py-3.5 px-8 sm:px-10 rounded-full shadow-sm hover:shadow-md transition-all duration-300 w-full sm:w-auto">
+                        <span>了解活動</span>
+                        <i data-lucide="arrow-down" class="w-4 h-4 transition-transform group-hover:translate-y-1"></i>
+                    </a>
+                    <a href="#" class="group flex items-center justify-center gap-2 bg-gradient-to-r from-tech-primary to-tech-secondary hover:from-sky-500 hover:to-violet-500 text-white font-bold py-3 sm:py-3.5 px-8 sm:px-10 rounded-full shadow-[0_4px_15px_rgba(2,132,199,0.3)] transition-all duration-300 transform hover:-translate-y-0.5 w-full sm:w-auto">
+                        <span>立即報名</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第二區塊: 核心理念 -->
+        <section id="core-concept" class="section-block mb-24 lg:mb-0">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center w-full">
+                <div class="lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left">
+                    <div class="relative mb-8">
+                        <div class="absolute inset-0 bg-sky-200 blur-3xl opacity-30 animate-pulse-slow"></div>
+                        <svg class="w-32 h-32 lg:w-48 lg:h-48 text-tech-primary relative animate-spin-slow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/>
+                            <circle cx="12" cy="12" r="9" stroke-dasharray="2 2"/>
+                        </svg>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="text-tech-primary text-xs font-black tracking-[0.4em] uppercase opacity-60">Objective Philosophy</div>
+                        <h3 class="text-4xl lg:text-6xl font-black tech-text-gradient leading-none">核心理念</h3>
+                        <p class="text-tech-textMuted font-tech tracking-widest text-sm lg:text-base mt-4 uppercase">Unlock Potential // Redefine Education</p>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="glass-panel rounded-3xl p-8 lg:p-10 relative group hover:-translate-y-1 transition-transform border-l-4 border-l-tech-primary">
+                        <div class="flex items-start gap-5">
+                            <div class="bg-sky-50 p-3 rounded-2xl text-tech-primary shadow-inner">
+                                <i data-lucide="layers" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-tech-text mb-3 tracking-tight">系統化教學架構</h4>
+                                <p class="text-tech-textMuted leading-relaxed text-base lg:text-lg">
+                                    聚焦於 <span class="text-tech-primary font-bold">PEC</span> 的系統化架構，將 <span class="text-tech-primary font-bold">CBME</span> 精神轉化為清晰的教學藍圖，確保每一分投入都能精準對焦學習成效。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel rounded-3xl p-8 lg:p-10 relative group hover:-translate-y-1 transition-transform border-l-4 border-l-tech-secondary">
+                        <div class="flex items-start gap-5">
+                            <div class="bg-violet-50 p-3 rounded-2xl text-tech-secondary shadow-inner">
+                                <i data-lucide="zap" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-tech-text mb-3 tracking-tight">共鳴式教學策略</h4>
+                                <p class="text-tech-textMuted leading-relaxed text-base lg:text-lg">
+                                    透過「結構化減壓」與「共鳴式教學」策略，協助教師在教學中找回方法，同時找回教學的熱情與永續復原力。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第三區塊: 詳細內容 -->
+        <section id="details" class="section-block mb-24 lg:mb-0">
+            <div class="w-full">
+                <div class="flex flex-col items-center gap-3 mb-12">
+                    <div class="text-tech-primary text-xs font-black tracking-[0.3em] uppercase mb-2">Detailed Information</div>
+                    <h3 class="text-3xl sm:text-4xl lg:text-5xl font-bold tech-text-gradient tracking-widest text-center flex items-center gap-4">
+                        <span class="w-8 sm:w-16 h-[2.5px] bg-gradient-to-r from-transparent to-tech-primary"></span>
+                        詳細內容
+                        <span class="w-8 sm:w-16 h-[2.5px] bg-gradient-to-l from-transparent to-tech-primary"></span>
+                    </h3>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10">
+                    <!-- 參與對象 (已調整卡片內距) -->
+                    <div class="glass-panel rounded-3xl p-8 lg:p-10 hover:bg-white/80 transition-all flex flex-col h-full">
+                        <div class="flex items-center justify-between mb-8">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-2xl bg-violet-50 flex items-center justify-center text-tech-secondary shadow-inner">
+                                    <i data-lucide="users" class="w-6 h-6"></i>
+                                </div>
+                                <h4 class="text-2xl font-bold text-tech-text tracking-tight">參與對象</h4>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-4 flex-grow">
+                            <p class="text-tech-textMuted text-lg lg:text-xl font-bold leading-relaxed mb-1">
+                                奇美醫療體系三院區：
+                            </p>
+                            <div class="grid grid-cols-1 gap-3.5">
+                                <div class="bg-white/50 border border-slate-100 p-3 lg:p-3.5 rounded-2xl flex items-center gap-3 group transition-all hover:bg-white hover:shadow-sm">
+                                    <div class="bg-tech-secondary/10 p-2 rounded-xl"><i data-lucide="user-cog" class="w-6 h-6 text-tech-secondary"></i></div>
+                                    <span class="font-bold text-tech-text text-lg lg:text-xl tracking-tight">計畫主持人</span>
+                                </div>
+                                <div class="bg-white/50 border border-slate-100 p-3 lg:p-3.5 rounded-2xl flex items-center gap-3 group transition-all hover:bg-white hover:shadow-sm">
+                                    <div class="bg-tech-accent/10 p-2 rounded-xl"><i data-lucide="clipboard-check" class="w-6 h-6 text-tech-accent"></i></div>
+                                    <span class="font-bold text-tech-text text-lg lg:text-xl tracking-tight">教學負責人</span>
+                                </div>
+                                <div class="bg-white/50 border border-slate-100 p-3 lg:p-3.5 rounded-2xl flex items-center gap-3 group transition-all hover:bg-white hover:shadow-sm">
+                                    <div class="bg-tech-primary/10 p-2 rounded-xl"><i data-lucide="graduation-cap" class="w-6 h-6 text-tech-primary"></i></div>
+                                    <span class="font-bold text-tech-text text-lg lg:text-xl tracking-tight">臨床教師</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 名額標示 -->
+                        <div class="mt-8 pt-6 border-t border-slate-100 flex items-center justify-center">
+                            <div class="bg-tech-primary text-white px-8 py-2.5 rounded-full text-lg font-black shadow-lg shadow-tech-primary/30 animate-pulse">
+                                限量 150 名
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 學分認證 -->
+                    <div class="glass-panel rounded-3xl p-8 lg:p-10 hover:bg-white/80 transition-all">
+                        <div class="flex items-center gap-4 mb-8">
+                            <div class="w-12 h-12 rounded-2xl bg-sky-50 flex items-center justify-center text-tech-primary shadow-inner">
+                                <i data-lucide="award" class="w-6 h-6"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold text-tech-text tracking-tight">學分認證</h4>
+                        </div>
+                        <ul class="text-tech-textMuted text-lg lg:text-xl space-y-6 font-medium">
+                            <li class="flex items-start gap-3">
+                                <div class="bg-sky-50 p-1 rounded-full shrink-0"><i data-lucide="check" class="w-5 h-5 text-tech-primary"></i></div>
+                                <span>臨床教師認證B類「六大核心」<span class="text-tech-primary font-bold">3學分</span></span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <div class="bg-sky-50 p-1 rounded-full shrink-0"><i data-lucide="check" class="w-5 h-5 text-tech-primary"></i></div>
+                                <span>臨床教師認證「進階」<span class="text-tech-primary font-bold">1.5學分</span></span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <div class="bg-sky-50 p-1 rounded-full shrink-0"><i data-lucide="check" class="w-5 h-5 text-tech-primary"></i></div>
+                                <span>教學訓練計畫主持人培訓課程</span>
+                            </li>
+                            <li class="flex items-start gap-3 text-tech-primary font-bold">
+                                <div class="bg-sky-100 p-1 rounded-full shrink-0"><i data-lucide="check" class="w-5 h-5 text-tech-primary"></i></div>
+                                <span>衛生福利部繼續教育積分 (申請中)</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第四區塊: 活動議程 -->
+        <section id="agenda" class="section-block mb-24 lg:mb-0">
+            <div class="w-full">
+                <div class="flex flex-col items-center gap-3 mb-10">
+                    <div class="text-tech-secondary text-xs font-black tracking-[0.3em] uppercase mb-2">Event Schedule</div>
+                    <h3 class="text-3xl sm:text-4xl lg:text-5xl font-bold tech-text-gradient tracking-widest text-center flex items-center gap-4">
+                        <span class="w-8 sm:w-16 h-[2.5px] bg-gradient-to-r from-transparent to-tech-secondary"></span>
+                        活動議程
+                        <span class="w-8 sm:w-16 h-[2.5px] bg-gradient-to-l from-transparent to-tech-secondary"></span>
+                    </h3>
+                </div>
+                
+                <div class="glass-panel rounded-[2rem] p-6 sm:p-10 lg:p-12">
+                    <div class="relative border-l-2 border-sky-100 ml-2 sm:ml-4 md:ml-10 space-y-8 sm:space-y-12">
+                        <!-- 12:30 報到 -->
+                        <div class="relative pl-6 sm:pl-12">
+                            <div class="absolute w-4 h-4 bg-white border-2 border-tech-primary rounded-full -left-[9px] top-3 shadow-[0_0_8px_rgba(14,165,233,0.4)]"></div>
+                            <div class="flex flex-col md:flex-row md:items-start gap-4 md:gap-10">
+                                <div class="font-tech text-tech-primary font-black text-lg lg:text-xl tracking-wide w-fit md:w-[14rem] shrink-0 flex items-center gap-3 pt-1 bg-sky-50/80 border border-sky-100 px-4 py-2 rounded-xl text-center">
+                                    <i data-lucide="clock" class="w-5 h-5"></i>
+                                    12:30 ~ 12:50
+                                </div>
+                                <div class="bg-white/90 border border-slate-100 rounded-2xl p-4 sm:p-5 flex-1 shadow-sm mt-1 md:mt-0">
+                                    <h4 class="text-xl font-bold text-tech-text">報 到</h4>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 12:50 致詞 -->
+                        <div class="relative pl-6 sm:pl-12">
+                            <div class="absolute w-4 h-4 bg-white border-2 border-tech-primary rounded-full -left-[9px] top-3 shadow-[0_0_8px_rgba(14,165,233,0.4)]"></div>
+                            <div class="flex flex-col md:flex-row md:items-start gap-4 md:gap-10">
+                                <div class="font-tech text-tech-primary font-black text-lg lg:text-xl tracking-wide w-fit md:w-[14rem] shrink-0 flex items-center gap-3 pt-1 bg-sky-50/80 border border-sky-100 px-4 py-2 rounded-xl text-center">
+                                    <i data-lucide="clock" class="w-5 h-5"></i>
+                                    12:50 ~ 13:00
+                                </div>
+                                <div class="bg-white/90 border border-slate-100 rounded-2xl p-4 sm:p-5 flex-1 shadow-sm mt-1 md:mt-0">
+                                    <h4 class="text-xl font-bold text-tech-text">長官致詞</h4>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 13:00 PEC -->
+                        <div class="relative pl-6 sm:pl-12">
+                            <div class="absolute w-5 h-5 bg-tech-accent border-[3px] border-white rounded-full -left-[11px] top-3 shadow-[0_0_12px_rgba(8,145,178,0.5)] animate-pulse"></div>
+                            <div class="flex flex-col md:flex-row md:items-start gap-4 md:gap-10">
+                                <div class="font-tech text-tech-accent font-black text-lg lg:text-xl tracking-wide w-fit md:w-[14rem] shrink-0 flex items-center gap-3 pt-1 bg-cyan-50/80 border border-cyan-100 px-4 py-2 rounded-xl text-center">
+                                    <i data-lucide="clock" class="w-5 h-5"></i>
+                                    13:00 ~ 14:30
+                                </div>
+                                <div class="bg-cyan-50/50 border border-cyan-100 rounded-3xl p-5 sm:p-8 flex-1 shadow-sm mt-1 md:mt-0 relative overflow-hidden">
+                                    <div class="absolute top-0 left-0 w-2 h-full bg-tech-accent"></div>
+                                    <h4 class="text-2xl font-bold text-tech-text mb-6">PEC 概論</h4>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                        <div class="bg-white/80 p-5 rounded-2xl border border-cyan-50 shadow-sm">
+                                            <p class="text-sm text-tech-accent font-black tracking-widest mb-3 uppercase flex items-center gap-2"><i data-lucide="mic" class="w-4 h-4"></i> Speaker / 講者</p>
+                                            <p class="text-2xl text-tech-text font-bold">郭淑柳 副主任</p>
+                                            <p class="text-tech-textMuted text-base font-medium">臺北醫學大學附設醫院教學部</p>
+                                        </div>
+                                        <div class="bg-white/80 p-5 rounded-2xl border border-cyan-50 shadow-sm">
+                                            <p class="text-sm text-tech-secondary font-black tracking-widest mb-3 uppercase flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4"></i> Chair / 座長</p>
+                                            <p class="text-2xl text-tech-text font-bold">江惠英 副部長</p>
+                                            <p class="text-tech-textMuted text-base font-medium">奇美醫院護理部</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 14:30 Coffee Break -->
+                        <div class="relative pl-6 sm:pl-12">
+                            <div class="absolute w-4 h-4 bg-white border-2 border-tech-primary rounded-full -left-[9px] top-3 shadow-[0_0_8px_rgba(14,165,233,0.4)]"></div>
+                            <div class="flex flex-col md:flex-row md:items-start gap-4 md:gap-10">
+                                <div class="font-tech text-tech-primary font-black text-lg lg:text-xl tracking-wide w-fit md:w-[14rem] shrink-0 flex items-center gap-3 pt-1 bg-sky-50/80 border border-sky-100 px-4 py-2 rounded-xl text-center">
+                                    <i data-lucide="coffee" class="w-5 h-5"></i>
+                                    14:30 ~ 14:45
+                                </div>
+                                <div class="bg-white/90 border border-slate-100 rounded-2xl p-4 sm:p-5 flex-1 shadow-sm mt-1 md:mt-0 flex items-center justify-between">
+                                    <h4 class="text-xl font-bold text-tech-text">Coffee Break</h4>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 14:45 主題分享 -->
+                        <div class="relative pl-6 sm:pl-12">
+                            <div class="absolute w-5 h-5 bg-tech-secondary border-[3px] border-white rounded-full -left-[11px] top-3 shadow-[0_0_12px_rgba(124,58,237,0.5)] animate-pulse"></div>
+                            <div class="flex flex-col md:flex-row md:items-start gap-4 md:gap-10">
+                                <div class="font-tech text-tech-secondary font-black text-lg lg:text-xl tracking-wide w-fit md:w-[14rem] shrink-0 flex items-center gap-3 pt-1 bg-violet-50/80 border border-violet-100 px-4 py-2 rounded-xl text-center">
+                                    <i data-lucide="clock" class="w-5 h-5"></i>
+                                    14:45 ~ 15:45
+                                </div>
+                                <div class="bg-violet-50/50 border border-violet-100 rounded-3xl p-5 sm:p-8 flex-1 shadow-sm mt-1 md:mt-0 relative overflow-hidden">
+                                    <div class="absolute top-0 left-0 w-2 h-full bg-tech-secondary"></div>
+                                    <h4 class="text-2xl font-bold text-tech-text mb-6 leading-tight">在教學中找到方法，也找回自己</h4>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                        <div class="bg-white/80 p-5 rounded-2xl border border-violet-50 shadow-sm">
+                                            <p class="text-sm text-tech-secondary font-black tracking-widest mb-4 uppercase flex items-center gap-2"><i data-lucide="mic" class="w-4 h-4"></i> Speakers / 講者</p>
+                                            <div class="space-y-4">
+                                                <div><p class="text-tech-text font-bold text-xl">余懷瑾 仙女老師</p><p class="text-tech-textMuted text-base font-medium">以人顧問有限公司負責人</p></div>
+                                                <div class="border-t border-slate-100 pt-3"><p class="text-tech-text font-bold text-xl">倪昀安 專員</p><p class="text-tech-textMuted text-base font-medium">台灣費森尤斯卡比</p></div>
+                                            </div>
+                                        </div>
+                                        <div class="bg-white/80 p-5 rounded-2xl border border-violet-50 shadow-sm">
+                                            <p class="text-sm text-tech-primary font-black tracking-widest mb-4 uppercase flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4"></i> Chair / 座長</p>
+                                            <p class="text-2xl text-tech-text font-bold">蔡長志 主任</p>
+                                            <p class="text-tech-textMuted text-base font-medium">奇美醫院臨床技能中心</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 15:45 綜合討論 -->
+                        <div class="relative pl-6 sm:pl-12">
+                            <div class="absolute w-4 h-4 bg-white border-2 border-tech-primary rounded-full -left-[9px] top-3 shadow-[0_0_8px_rgba(14,165,233,0.4)]"></div>
+                            <div class="flex flex-col md:flex-row md:items-start gap-4 md:gap-10">
+                                <div class="font-tech text-tech-primary font-black text-base md:text-lg tracking-wide w-fit md:w-[14rem] shrink-0 flex items-center gap-3 pt-1 bg-sky-50/80 border border-sky-100 px-4 py-2 rounded-xl text-center">
+                                    <i data-lucide="clock" class="w-5 h-5"></i>
+                                    15:45 ~ 16:00
+                                </div>
+                                <div class="bg-white/90 border border-slate-100 rounded-2xl p-4 sm:p-5 flex-1 shadow-sm mt-1 md:mt-0">
+                                    <h4 class="text-xl font-bold text-tech-text">綜合討論</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第五區塊: 聯絡資訊 -->
+        <section id="contact" class="section-block mb-12">
+            <div class="w-full max-w-4xl mx-auto">
+                <div class="glass-panel rounded-[2.5rem] p-[1.5px] bg-gradient-to-r from-sky-300 via-cyan-300 to-violet-300 shadow-2xl shadow-sky-100/50">
+                    <div class="bg-white rounded-[2.4rem] p-8 sm:p-12 flex flex-col sm:flex-row items-center sm:items-start md:items-center justify-between gap-8 text-center sm:text-left">
+                        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+                            <div class="w-20 h-20 rounded-3xl bg-sky-50 flex items-center justify-center text-tech-primary border border-sky-100 shrink-0">
+                                <i data-lucide="headset" class="w-10 h-10"></i>
+                            </div>
+                            <div class="space-y-3 text-left">
+                                <p class="text-tech-text font-bold text-xl lg:text-2xl">有任何疑問？請聯繫我們</p>
+                                <p class="text-tech-textMuted text-base lg:text-lg font-medium">主辦：奇美醫療財團法人奇美醫院教學部</p>
+                                <p class="text-tech-textMuted text-base lg:text-lg font-medium">聯絡人：陳詩芸 教學行政管理員</p>
+                            </div>
+                        </div>
+                        <div class="space-y-4 flex flex-col items-center sm:items-start w-full sm:w-auto mt-4 sm:mt-0 font-bold">
+                            <a href="tel:062812811,57439" class="flex items-center gap-3 text-tech-textMuted hover:text-tech-primary hover:bg-sky-50 transition-all px-6 py-4 rounded-2xl border border-slate-100 w-full justify-center">
+                                <i data-lucide="phone" class="w-5 h-5 text-slate-400"></i>
+                                06-281-2811 分機 57439
+                            </a>
+                            <a href="mailto:b20715@mail.chimei.org.tw" class="flex items-center gap-3 text-tech-textMuted hover:text-tech-primary hover:bg-sky-50 transition-all px-6 py-4 rounded-2xl border border-slate-100 w-full justify-center">
+                                <i data-lucide="mail" class="w-5 h-5 text-slate-400"></i>
+                                b20715@mail.chimei.org.tw
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        lucide.createIcons();
+        
+        // 更新側邊導航點狀態
+        const sections = document.querySelectorAll('section');
+        const dots = document.querySelectorAll('.side-indicator-dot');
+        window.addEventListener('scroll', () => {
+            let current = "";
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= (sectionTop - 300)) current = section.getAttribute('id');
+            });
+            dots.forEach(dot => {
+                dot.classList.remove('active');
+                if (dot.getAttribute('href').includes(current)) dot.classList.add('active');
+            });
+        });
+
+        // 粒子背景動畫
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let w, h;
+        function resize() {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+            initParticles();
+        }
+        window.addEventListener('resize', resize);
+        class Particle {
+            constructor() {
+                this.x = Math.random() * w; this.y = Math.random() * h;
+                this.vx = (Math.random() - 0.5) * 0.7; this.vy = (Math.random() - 0.5) * 0.7;
+                this.radius = 1.5;
+            }
+            update() {
+                this.x += this.vx; this.y += this.vy;
+                if (this.x < 0 || this.x > w) this.vx *= -1;
+                if (this.y < 0 || this.y > h) this.vy *= -1;
+            }
+            draw() {
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(14, 165, 233, 0.4)'; ctx.fill();
+            }
+        }
+        function initParticles() {
+            particles = [];
+            let numParticles = Math.min(Math.floor((w * h) / 10000), 100);
+            for (let i = 0; i < numParticles; i++) particles.push(new Particle());
+        }
+        function animate() {
+            ctx.clearRect(0, 0, w, h);
+            particles.forEach((p, i) => {
+                p.update(); p.draw();
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = p.x - particles[j].x, dy = p.y - particles[j].y, dist = Math.sqrt(dx*dx + dy*dy);
+                    if (dist < 150) {
+                        ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(14, 165, 233, ${(1 - dist/150) * 0.25})`; ctx.lineWidth = 1; ctx.stroke();
+                    }
+                }
+            });
+            requestAnimationFrame(animate);
+        }
+        resize(); animate();
+    </script>
+</body>
+</html>
