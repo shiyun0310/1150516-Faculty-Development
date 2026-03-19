@@ -124,6 +124,14 @@
         .side-indicator-dot.active {
             background: #0284c7; transform: scale(1.5); box-shadow: 0 0 10px rgba(2, 132, 199, 0.4);
         }
+
+        .input-group:focus-within label {
+            color: #0284c7;
+        }
+        .input-group:focus-within .icon-container {
+            background-color: #e0f2fe;
+            color: #0284c7;
+        }
     </style>
 </head>
 <body class="antialiased min-h-screen relative">
@@ -140,6 +148,7 @@
         <a href="#core-concept" class="side-indicator-dot" title="核心理念"></a>
         <a href="#details" class="side-indicator-dot" title="詳細內容"></a>
         <a href="#agenda" class="side-indicator-dot" title="活動議程"></a>
+        <a href="#registration" class="side-indicator-dot" title="立即報名"></a>
         <a href="#contact" class="side-indicator-dot" title="聯絡資訊"></a>
     </div>
 
@@ -160,7 +169,7 @@
                         <a href="#contact" class="text-tech-textMuted hover:text-tech-primary font-bold tracking-wide transition-colors">聯絡資訊</a>
                     </div>
                     <div class="shrink-0">
-                        <a href="#" class="inline-block bg-gradient-to-r from-tech-primary to-tech-secondary hover:from-sky-500 hover:to-violet-500 text-white font-bold py-2.5 px-6 sm:px-8 rounded-full shadow-[0_4px_15px_rgba(2,132,199,0.3)] transition-all duration-300 transform hover:-translate-y-0.5">
+                        <a href="#registration" class="inline-block bg-gradient-to-r from-tech-primary to-tech-secondary hover:from-sky-500 hover:to-violet-500 text-white font-bold py-2.5 px-6 sm:px-8 rounded-full shadow-[0_4px_15px_rgba(2,132,199,0.3)] transition-all duration-300 transform hover:-translate-y-0.5">
                             立即報名
                         </a>
                     </div>
@@ -213,7 +222,7 @@
                         <span>了解活動</span>
                         <i data-lucide="arrow-down" class="w-4 h-4 transition-transform group-hover:translate-y-1"></i>
                     </a>
-                    <a href="#" class="group flex items-center justify-center gap-2 bg-gradient-to-r from-tech-primary to-tech-secondary hover:from-sky-500 hover:to-violet-500 text-white font-bold py-3 sm:py-3.5 px-8 sm:px-10 rounded-full shadow-[0_4px_15px_rgba(2,132,199,0.3)] transition-all duration-300 transform hover:-translate-y-0.5 w-full sm:w-auto">
+                    <a href="#registration" class="group flex items-center justify-center gap-2 bg-gradient-to-r from-tech-primary to-tech-secondary hover:from-sky-500 hover:to-violet-500 text-white font-bold py-3 sm:py-3.5 px-8 sm:px-10 rounded-full shadow-[0_4px_15px_rgba(2,132,199,0.3)] transition-all duration-300 transform hover:-translate-y-0.5 w-full sm:w-auto">
                         <span>立即報名</span>
                         <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
                     </a>
@@ -284,7 +293,7 @@
                 </div>
                 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10">
-                    <!-- 參與對象 (已調整卡片內距) -->
+                    <!-- 參與對象 -->
                     <div class="glass-panel rounded-3xl p-8 lg:p-10 hover:bg-white/80 transition-all flex flex-col h-full">
                         <div class="flex items-center justify-between mb-8">
                             <div class="flex items-center gap-4">
@@ -484,7 +493,154 @@
             </div>
         </section>
 
-        <!-- 第五區塊: 聯絡資訊 -->
+        <!-- 第五區塊: 報名表單 -->
+        <section id="registration" class="section-block mb-24 lg:mb-0">
+            <div class="w-full">
+                <div class="flex flex-col items-center gap-3 mb-12">
+                    <div class="text-tech-primary text-xs font-black tracking-[0.3em] uppercase mb-2">Join Us Now</div>
+                    <h3 class="text-3xl sm:text-4xl lg:text-5xl font-bold tech-text-gradient tracking-widest text-center flex items-center gap-4">
+                        <span class="w-8 sm:w-16 h-[2.5px] bg-gradient-to-r from-transparent to-tech-primary"></span>
+                        報名表單
+                        <span class="w-8 sm:w-16 h-[2.5px] bg-gradient-to-l from-transparent to-tech-primary"></span>
+                    </h3>
+                </div>
+
+                <div class="max-w-4xl mx-auto">
+                    <!-- 容器設定最小高度，防止內容切換時高度塌陷 -->
+                    <div class="glass-panel rounded-[2.5rem] p-8 lg:p-12 shadow-2xl relative overflow-visible min-h-[500px] flex flex-col justify-center">
+                        
+                        <!-- 裝飾背景 (固定在容器內部) -->
+                        <div class="absolute -top-6 -right-6 w-24 h-24 bg-sky-100 rounded-full blur-2xl opacity-50 z-0"></div>
+                        <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-violet-100 rounded-full blur-3xl opacity-50 z-0"></div>
+
+                        <!-- 實際表單 -->
+                        <form id="registrationForm" class="space-y-8 relative z-10 transition-all duration-300" onsubmit="handleFormSubmit(event)">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                                <!-- 姓名 -->
+                                <div class="input-group">
+                                    <label class="block text-tech-text font-bold mb-2 ml-1 text-sm transition-colors">姓名</label>
+                                    <div class="relative group">
+                                        <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1.5 rounded-lg transition-all group-focus-within:bg-sky-50">
+                                            <i data-lucide="user" class="w-5 h-5"></i>
+                                        </div>
+                                        <input type="text" name="name" required placeholder="請輸入真實姓名" 
+                                            class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-2xl py-3.5 pl-14 pr-4 text-tech-text outline-none transition-all placeholder:text-slate-300">
+                                    </div>
+                                </div>
+
+                                <!-- 聯繫電話 -->
+                                <div class="input-group">
+                                    <label class="block text-tech-text font-bold mb-2 ml-1 text-sm transition-colors">聯繫電話 (分機或簡碼)</label>
+                                    <div class="relative group">
+                                        <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1.5 rounded-lg transition-all group-focus-within:bg-sky-50">
+                                            <i data-lucide="phone" class="w-5 h-5"></i>
+                                        </div>
+                                        <input type="text" name="phone" required placeholder="例如：57439 或 8123" 
+                                            class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-2xl py-3.5 pl-14 pr-4 text-tech-text outline-none transition-all placeholder:text-slate-300">
+                                    </div>
+                                </div>
+
+                                <!-- 職類別 -->
+                                <div class="input-group">
+                                    <label class="block text-tech-text font-bold mb-2 ml-1 text-sm transition-colors">職類別</label>
+                                    <div class="relative group">
+                                        <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1.5 rounded-lg transition-all group-focus-within:bg-sky-50">
+                                            <i data-lucide="briefcase" class="w-5 h-5"></i>
+                                        </div>
+                                        <select name="category" required class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-2xl py-3.5 pl-14 pr-4 text-tech-text outline-none transition-all appearance-none">
+                                            <option value="" disabled selected>請選擇職類別</option>
+                                            <option value="西醫">西醫</option>
+                                            <option value="藥事">藥事</option>
+                                            <option value="醫事放射">醫事放射</option>
+                                            <option value="醫事檢驗">醫事檢驗</option>
+                                            <option value="護理">護理</option>
+                                            <option value="營養">營養</option>
+                                            <option value="呼吸治療">呼吸治療</option>
+                                            <option value="聽力">聽力</option>
+                                            <option value="物理治療">物理治療</option>
+                                            <option value="職能治療">職能治療</option>
+                                            <option value="臨床心理">臨床心理</option>
+                                            <option value="語言治療">語言治療</option>
+                                            <option value="其他">其他</option>
+                                        </select>
+                                        <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+                                            <i data-lucide="chevron-down" class="w-5 h-5"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 單位 -->
+                                <div class="input-group">
+                                    <label class="block text-tech-text font-bold mb-2 ml-1 text-sm transition-colors">單位</label>
+                                    <div class="relative group">
+                                        <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1.5 rounded-lg transition-all group-focus-within:bg-sky-50">
+                                            <i data-lucide="building-2" class="w-5 h-5"></i>
+                                        </div>
+                                        <input type="text" name="department" required placeholder="請填寫所屬科室名稱" 
+                                            class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-2xl py-3.5 pl-14 pr-4 text-tech-text outline-none transition-all placeholder:text-slate-300">
+                                    </div>
+                                </div>
+
+                                <!-- 職稱 -->
+                                <div class="input-group">
+                                    <label class="block text-tech-text font-bold mb-2 ml-1 text-sm transition-colors">職稱</label>
+                                    <div class="relative group">
+                                        <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1.5 rounded-lg transition-all group-focus-within:bg-sky-50">
+                                            <i data-lucide="tag" class="w-5 h-5"></i>
+                                        </div>
+                                        <input type="text" name="jobTitle" required placeholder="例如：主任、專員、住院醫師" 
+                                            class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-2xl py-3.5 pl-14 pr-4 text-tech-text outline-none transition-all placeholder:text-slate-300">
+                                    </div>
+                                </div>
+
+                                <!-- 信箱 -->
+                                <div class="input-group">
+                                    <label class="block text-tech-text font-bold mb-2 ml-1 text-sm transition-colors">電子信箱</label>
+                                    <div class="relative group">
+                                        <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1.5 rounded-lg transition-all group-focus-within:bg-sky-50">
+                                            <i data-lucide="mail" class="w-5 h-5"></i>
+                                        </div>
+                                        <input type="email" name="email" required placeholder="用於寄送報名確認函" 
+                                            class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-2xl py-3.5 pl-14 pr-4 text-tech-text outline-none transition-all placeholder:text-slate-300">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pt-6">
+                                <button type="submit" 
+                                    class="w-full bg-gradient-to-r from-tech-primary to-tech-secondary hover:from-sky-500 hover:to-violet-500 text-white font-black py-4 rounded-2xl shadow-xl shadow-sky-200 transition-all duration-300 transform hover:-translate-y-1 active:scale-[0.98] flex items-center justify-center gap-3 text-lg">
+                                    <i data-lucide="send" class="w-6 h-6"></i>
+                                    <span>送出報名資訊</span>
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- 提交成功訊息 (優化排版) -->
+                        <div id="successMessage" class="hidden relative z-10 flex-col items-center justify-center text-center py-10 animate-in fade-in zoom-in duration-500">
+                            <div class="w-24 h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-8 mx-auto shadow-sm">
+                                <i data-lucide="check-circle" class="w-14 h-14"></i>
+                            </div>
+                            <h4 class="text-4xl font-black text-tech-text mb-6">報名成功！</h4>
+                            <div class="space-y-2 text-tech-textMuted text-xl max-w-lg mx-auto leading-relaxed">
+                                <p>我們已收到您的報名</p>
+                                <p>將於課程前兩周再提醒您</p>
+                                <p>請留意收信</p>
+                            </div>
+                            <button onclick="resetForm()" class="mt-12 bg-slate-50 hover:bg-white border border-slate-200 text-tech-primary font-bold px-8 py-3 rounded-xl transition-all flex items-center gap-2 mx-auto">
+                                <i data-lucide="arrow-left" class="w-5 h-5"></i> 填寫另一份報名表
+                            </button>
+                        </div>
+
+                        <!-- 錯誤訊息彈窗 -->
+                        <div id="errorMessage" class="hidden fixed bottom-10 left-1/2 -translate-x-1/2 bg-red-600 text-white px-6 py-3 rounded-xl shadow-2xl z-[100] animate-bounce">
+                            傳送失敗，請稍後再試。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第六區塊: 聯絡資訊 -->
         <section id="contact" class="section-block mb-12">
             <div class="w-full max-w-4xl mx-auto">
                 <div class="glass-panel rounded-[2.5rem] p-[1.5px] bg-gradient-to-r from-sky-300 via-cyan-300 to-violet-300 shadow-2xl shadow-sky-100/50">
@@ -518,6 +674,9 @@
 
     <script>
         lucide.createIcons();
+
+        // 🚀 已填入您的 Google Apps Script 網頁應用程式 URL
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwtIqkomcWdavGzgapoAZscTID-LOwanETcambFaQ3m2FyJOxBu5CZ8khuTTcsnqrruAw/exec';
         
         // 更新側邊導航點狀態
         const sections = document.querySelectorAll('section');
@@ -533,6 +692,63 @@
                 if (dot.getAttribute('href').includes(current)) dot.classList.add('active');
             });
         });
+
+        // 表單提交處理
+        async function handleFormSubmit(e) {
+            e.preventDefault();
+            const form = document.getElementById('registrationForm');
+            const success = document.getElementById('successMessage');
+            const errorMsg = document.getElementById('errorMessage');
+            const btn = form.querySelector('button');
+            
+            // UI 回饋：按鈕進入載入狀態
+            btn.innerHTML = '<i data-lucide="loader-2" class="w-6 h-6 animate-spin"></i><span>資料傳送中...</span>';
+            lucide.createIcons();
+            btn.disabled = true;
+
+            const formData = new FormData(form);
+
+            try {
+                // 發送資料至 Google Apps Script
+                await fetch(scriptURL, { 
+                    method: 'POST', 
+                    body: formData,
+                    mode: 'no-cors' 
+                });
+
+                // 顯示成功介面：改為切換 hidden 而非絕對定位
+                form.classList.add('hidden');
+                success.classList.remove('hidden');
+                success.classList.add('flex'); // 確保使用彈性佈局置中
+                lucide.createIcons();
+                
+                // 平滑捲動回表單頂部確保看到成功訊息
+                document.getElementById('registration').scrollIntoView({ behavior: 'smooth' });
+
+            } catch (error) {
+                console.error('Submission Error:', error);
+                btn.disabled = false;
+                btn.innerHTML = '<i data-lucide="send" class="w-6 h-6"></i><span>送出報名資訊</span>';
+                lucide.createIcons();
+                
+                // 顯示錯誤回饋
+                errorMsg.classList.remove('hidden');
+                setTimeout(() => errorMsg.classList.add('hidden'), 5000);
+            }
+        }
+
+        function resetForm() {
+            const form = document.getElementById('registrationForm');
+            const success = document.getElementById('successMessage');
+            form.reset();
+            form.classList.remove('hidden');
+            success.classList.add('hidden');
+            success.classList.remove('flex');
+            const btn = form.querySelector('button');
+            btn.disabled = false;
+            btn.innerHTML = '<i data-lucide="send" class="w-6 h-6"></i><span>送出報名資訊</span>';
+            lucide.createIcons();
+        }
 
         // 粒子背景動畫
         const canvas = document.getElementById('particleCanvas');
