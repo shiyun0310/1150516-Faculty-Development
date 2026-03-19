@@ -23,7 +23,8 @@
                         tech: {
                             bg: '#f8fafc',      // Slate 50
                             panel: '#ffffff',
-                            primary: '#0284c7', // Sky 600
+                            primary: '#0284c7', // Sky 600 (教學部標準色)
+                            primaryDeep: '#0c4a6e', // Sky 900
                             primaryLight: '#38bdf8', // Sky 400
                             secondary: '#7c3aed', // Violet 600
                             accent: '#0891b2', // Cyan 600
@@ -34,13 +35,18 @@
                     animation: {
                         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                         'float': 'float 6s ease-in-out infinite',
-                        'spin-slow': 'spin 12s linear infinite',
-                        'ping-slow': 'ping 2s cubic-bezier(0, 0, 0.2, 1) infinite',
+                        'spin-slow': 'spin 20s linear infinite',
+                        'spin-reverse': 'spin-reverse 25s linear infinite',
+                        'ping-slow': 'ping 3s cubic-bezier(0, 0, 0.2, 1) infinite',
                     },
                     keyframes: {
                         float: {
                             '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-10px)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        },
+                        'spin-reverse': {
+                            from: { transform: 'rotate(360deg)' },
+                            to: { transform: 'rotate(0deg)' },
                         }
                     }
                 }
@@ -167,20 +173,22 @@
     <nav class="fixed top-0 w-full z-50 glass-nav transition-all duration-300 h-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
             <div class="flex items-center justify-between h-full">
-                <a href="#hero" class="flex items-center gap-2 text-tech-text font-black text-xl tracking-wider shrink-0">
-                    <i data-lucide="cpu" class="text-tech-primary w-7 h-7"></i>
+                <!-- 加大品牌字體至 text-2xl 並同步加大圖示 -->
+                <a href="#hero" class="flex items-center gap-2.5 text-tech-text font-black text-2xl tracking-wider shrink-0">
+                    <i data-lucide="cpu" class="text-tech-primary w-8 h-8"></i>
                     <span>奇美醫院<span class="text-tech-primary">教學部</span></span>
                 </a>
                 
                 <div class="flex items-center gap-6 lg:gap-10">
-                    <div class="hidden lg:flex items-center space-x-8 text-sm xl:text-base">
+                    <!-- 導航字體維持 text-lg -->
+                    <div class="hidden lg:flex items-center space-x-8 text-lg xl:text-xl">
                         <a href="#core-concept" class="text-tech-textMuted hover:text-tech-primary font-bold tracking-wide transition-colors">核心理念</a>
                         <a href="#details" class="text-tech-textMuted hover:text-tech-primary font-bold tracking-wide transition-colors">詳細內容</a>
                         <a href="#agenda" class="text-tech-textMuted hover:text-tech-primary font-bold tracking-wide transition-colors">活動議程</a>
                         <a href="#contact" class="text-tech-textMuted hover:text-tech-primary font-bold tracking-wide transition-colors">聯絡資訊</a>
                     </div>
                     <div class="shrink-0">
-                        <a href="#registration" class="inline-block bg-gradient-to-r from-tech-primary to-tech-secondary hover:from-sky-500 hover:to-violet-500 text-white font-bold py-2.5 px-6 sm:px-8 rounded-full shadow-[0_4px_15px_rgba(2,132,199,0.3)] transition-all duration-300 transform hover:-translate-y-0.5">
+                        <a href="#registration" class="inline-block bg-gradient-to-r from-tech-primary to-tech-secondary hover:from-sky-500 hover:to-violet-500 text-white font-bold py-2.5 px-6 sm:px-8 rounded-full shadow-[0_4px_15px_rgba(2,132,199,0.3)] transition-all duration-300 transform hover:-translate-y-0.5 text-lg">
                             立即報名
                         </a>
                     </div>
@@ -216,26 +224,43 @@
                 </h2>
 
                 <div class="flex flex-col md:flex-row justify-center gap-4 sm:gap-6 max-w-4xl mx-auto">
-                    <div class="glass-panel rounded-2xl p-6 flex items-center gap-5 w-full md:w-1/2 hover:bg-white/80">
-                        <div class="p-3.5 bg-sky-50 rounded-xl border border-sky-100">
-                            <i data-lucide="calendar" class="text-tech-primary w-7 h-7"></i>
-                        </div>
-                        <div class="text-left">
-                            <div class="text-tech-textMuted text-xs sm:text-sm font-bold mb-1">活動日期</div>
-                            <div class="text-tech-text font-black text-lg sm:text-xl tracking-wide">115年5月16日 (六)</div>
-                        </div>
-                    </div>
-
-                    <div class="glass-panel rounded-2xl p-6 flex items-center gap-5 w-full md:w-1/2 hover:bg-white/80">
-                        <div class="p-3.5 bg-cyan-50 rounded-xl border border-cyan-100">
-                            <i data-lucide="map-pin" class="text-tech-accent w-7 h-7"></i>
-                        </div>
-                        <div class="text-left overflow-hidden">
-                            <div class="text-tech-textMuted text-xs sm:text-sm font-bold mb-1">活動地點</div>
-                            <div class="text-tech-text font-black text-base sm:text-lg lg:text-xl tracking-wide leading-tight">
-                                奇美醫院第五醫療大樓<span class="whitespace-nowrap">5樓國際會議廳</span>
+                    <!-- 活動日期卡片 -->
+                    <div class="glass-panel rounded-3xl p-6 sm:p-8 flex flex-col items-center sm:items-start gap-5 w-full md:w-1/2 hover:bg-white/80 group">
+                        <div class="flex items-center gap-5 w-full">
+                            <div class="p-3.5 bg-sky-50 rounded-xl border border-sky-100 group-hover:scale-110 transition-transform">
+                                <i data-lucide="calendar" class="text-tech-primary w-7 h-7"></i>
+                            </div>
+                            <div class="text-left">
+                                <div class="text-tech-textMuted text-xs sm:text-sm font-bold mb-1 tracking-widest uppercase">活動日期</div>
+                                <div class="text-tech-text font-black text-lg sm:text-xl tracking-wide leading-tight">
+                                    115年5月16日 (六)<br>
+                                    <span class="text-base sm:text-lg font-bold opacity-80">13:00~17:00 (12:30開始報到)</span>
+                                </div>
                             </div>
                         </div>
+                        <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=教師教學成長與培育研討會&dates=20260516T043000Z/20260516T090000Z&details=教師教學成長與培育研討會「教學不該這麼累」&location=奇美醫院第五醫療大樓5樓國際會議廳" target="_blank" class="w-full mt-2 flex items-center justify-center gap-2 py-2.5 px-4 bg-white/50 border border-sky-100 rounded-xl text-tech-primary font-bold text-sm hover:bg-tech-primary hover:text-white transition-all shadow-sm">
+                            <i data-lucide="calendar-plus" class="w-4 h-4"></i>
+                            點擊加入行事曆
+                        </a>
+                    </div>
+
+                    <!-- 活動地點卡片 -->
+                    <div class="glass-panel rounded-3xl p-6 sm:p-8 flex flex-col items-center sm:items-start gap-5 w-full md:w-1/2 hover:bg-white/80 group">
+                        <div class="flex items-center gap-5 w-full">
+                            <div class="p-3.5 bg-cyan-50 rounded-xl border border-cyan-100 group-hover:scale-110 transition-transform">
+                                <i data-lucide="map-pin" class="text-tech-accent w-7 h-7"></i>
+                            </div>
+                            <div class="text-left overflow-hidden">
+                                <div class="text-tech-textMuted text-xs sm:text-sm font-bold mb-1 tracking-widest uppercase">活動地點</div>
+                                <div class="text-tech-text font-black text-lg sm:text-xl tracking-wide leading-tight">
+                                    奇美醫院第五醫療大樓<span class="whitespace-nowrap">5樓國際會議廳</span>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="https://maps.app.goo.gl/kEuEFNDoTTrrWzzBA" target="_blank" class="w-full mt-2 flex items-center justify-center gap-2 py-2.5 px-4 bg-white/50 border border-cyan-100 rounded-xl text-tech-accent font-bold text-sm hover:bg-tech-accent hover:text-white transition-all shadow-sm">
+                            <i data-lucide="navigation" class="w-4 h-4"></i>
+                            點擊開啟地圖導航
+                        </a>
                     </div>
                 </div>
 
@@ -244,7 +269,7 @@
                         <span>了解活動</span>
                         <i data-lucide="arrow-down" class="w-4 h-4 transition-transform group-hover:translate-y-1"></i>
                     </a>
-                    <a href="#registration" class="group flex items-center justify-center gap-2 bg-gradient-to-r from-tech-primary to-tech-secondary hover:from-sky-500 hover:to-violet-500 text-white font-bold py-3 sm:py-3.5 px-8 sm:px-10 rounded-full shadow-[0_4px_15px_rgba(2,132,199,0.3)] transition-all duration-300 transform hover:-translate-y-0.5 w-full sm:w-auto">
+                    <a href="#registration" class="group flex items-center justify-center gap-2 bg-gradient-to-r from-tech-primary to-tech-secondary hover:from-sky-500 hover:to-violet-500 text-white font-bold py-3 sm:py-3.5 px-8 sm:px-10 rounded-full shadow-[0_4px_15px_rgba(2,132,199,0.3)] transition-all duration-300 transform hover:-translate-y-0.5 w-full sm:w-auto text-lg">
                         <span>立即報名</span>
                         <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
                     </a>
@@ -256,17 +281,45 @@
         <section id="core-concept" class="section-block mb-24 lg:mb-0">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center w-full">
                 <div class="lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left">
-                    <div class="relative mb-8">
-                        <div class="absolute inset-0 bg-sky-200 blur-3xl opacity-30 animate-pulse-slow"></div>
-                        <svg class="w-32 h-32 lg:w-48 lg:h-48 text-tech-primary relative animate-spin-slow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/>
-                            <circle cx="12" cy="12" r="9" stroke-dasharray="2 2"/>
-                        </svg>
+                    <!-- 更深色、減少透明度的智慧網絡圖形 -->
+                    <div class="relative w-56 h-56 lg:w-72 lg:h-72 mb-8 flex items-center justify-center animate-float">
+                        <!-- 加深的外層旋轉環 -->
+                        <div class="absolute inset-0 border-2 border-tech-primary/30 rounded-full animate-spin-slow"></div>
+                        <div class="absolute inset-10 border-2 border-tech-secondary/30 rounded-full animate-spin-reverse"></div>
+                        
+                        <!-- 加深核心節點與線條 -->
+                        <div class="relative z-10 w-full h-full flex items-center justify-center">
+                            <svg viewBox="0 0 100 100" class="w-full h-full">
+                                <!-- 加深連結線 (透明度由 30% 提高到 60%) -->
+                                <g stroke="currentColor" stroke-width="0.8" class="text-tech-primary/60">
+                                    <line x1="50" y1="50" x2="50" y2="20" class="animate-pulse" />
+                                    <line x1="50" y1="50" x2="75" y2="65" class="animate-pulse" style="animation-delay: 0.5s;" />
+                                    <line x1="50" y1="50" x2="25" y2="65" class="animate-pulse" style="animation-delay: 1s;" />
+                                </g>
+                                
+                                <!-- 加深核心圓點 (透明度由 5% 提高到 20%) -->
+                                <circle cx="50" cy="50" r="16" class="text-tech-primary/20 fill-current" />
+                                <circle cx="50" cy="50" r="7" class="text-tech-primary fill-current shadow-xl shadow-tech-primary/50" />
+                                <circle cx="50" cy="50" r="12" class="text-tech-primary animate-ping-slow opacity-40 border-2" fill="none" stroke="currentColor" />
+                                
+                                <!-- 加深周邊節點 -->
+                                <g class="animate-spin-slow" style="transform-origin: center;">
+                                    <circle cx="50" cy="20" r="5" class="text-tech-secondary fill-current shadow-lg" />
+                                    <circle cx="75" cy="65" r="5" class="text-tech-accent fill-current shadow-lg" />
+                                    <circle cx="25" cy="65" r="5" class="text-tech-primaryLight fill-current shadow-lg" />
+                                </g>
+                            </svg>
+                            
+                            <!-- 中央白色圖示 -->
+                            <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                <i data-lucide="book-open" class="w-8 h-8 text-white"></i>
+                            </div>
+                        </div>
                     </div>
-                    <div class="space-y-2">
-                        <div class="text-tech-primary text-xs font-black tracking-[0.4em] uppercase opacity-60">Objective Philosophy</div>
-                        <h3 class="text-4xl lg:text-6xl font-black tech-text-gradient leading-none">核心理念</h3>
-                        <p class="text-tech-textMuted font-tech tracking-widest text-sm lg:text-base mt-4 uppercase">Unlock Potential // Redefine Education</p>
+
+                    <div class="space-y-4">
+                        <h3 class="text-5xl lg:text-7xl font-black tech-text-gradient leading-none tracking-tight">核心理念</h3>
+                        <div class="w-24 h-1.5 bg-gradient-to-r from-tech-primary to-tech-secondary rounded-full mx-auto lg:mx-0"></div>
                     </div>
                 </div>
 
@@ -347,12 +400,9 @@
                         </div>
 
                         <!-- 名額標示 -->
-                        <div class="mt-8 pt-6 border-t border-slate-100 flex flex-col items-center justify-center gap-2">
+                        <div class="mt-8 pt-6 border-t border-slate-100 flex flex-col items-center justify-center gap-3">
                             <div class="bg-tech-primary text-white px-8 py-2.5 rounded-full text-lg font-black shadow-lg shadow-tech-primary/30 animate-pulse">
                                 限額 150 名
-                            </div>
-                            <div class="text-tech-primary font-bold text-sm tracking-widest mt-1">
-                                報名至 5 月 4 日(一)或額滿截止
                             </div>
                         </div>
                     </div>
@@ -528,9 +578,13 @@
                         報名表單
                         <span class="w-8 sm:w-16 h-[2.5px] bg-gradient-to-l from-transparent to-tech-primary"></span>
                     </h3>
-                    <!-- 新增報名期限提示 -->
-                    <div class="text-tech-primary/80 font-bold tracking-widest mt-2 bg-sky-50 px-6 py-1.5 rounded-full border border-sky-100 shadow-sm">
-                        報名至 5 月 4 日(一)或額滿截止
+                    
+                    <!-- 底色與 LOGO 教學部一致的提醒標籤 -->
+                    <div class="mt-4 bg-tech-primary text-white font-bold tracking-[0.2em] px-10 py-3 rounded-2xl shadow-xl border border-sky-500 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="calendar-clock" class="w-5 h-5 text-sky-100"></i>
+                            報名至 5 月 4 日(一) 或 額滿截止
+                        </div>
                     </div>
                 </div>
 
@@ -657,4 +711,237 @@
                                 <div class="input-group">
                                     <label class="block text-tech-text font-bold mb-2 ml-1 text-sm transition-colors">電子信箱</label>
                                     <div class="relative group">
-                                        <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1.5 rounded-lg transition-all group-focus-within
+                                        <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1.5 rounded-lg transition-all group-focus-within:bg-sky-50">
+                                            <i data-lucide="mail" class="w-5 h-5"></i>
+                                        </div>
+                                        <input type="email" name="email" required placeholder="用於寄送報名確認函" 
+                                            class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-2xl py-3.5 pl-14 pr-4 text-tech-text outline-none transition-all placeholder:text-slate-300">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pt-6">
+                                <button type="submit" 
+                                    class="w-full bg-gradient-to-r from-tech-primary to-tech-secondary hover:from-sky-500 hover:to-violet-500 text-white font-black py-4 rounded-2xl shadow-xl shadow-sky-200 transition-all duration-300 transform hover:-translate-y-1 active:scale-[0.98] flex items-center justify-center gap-3 text-lg">
+                                    <i data-lucide="send" class="w-6 h-6"></i>
+                                    <span>送出報名資訊</span>
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- 提交成功訊息 -->
+                        <div id="successMessage" class="hidden relative z-10 flex-col items-center justify-center text-center py-10 animate-in fade-in zoom-in duration-500">
+                            <div class="w-24 h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-8 mx-auto shadow-sm">
+                                <i data-lucide="check-circle" class="w-14 h-14"></i>
+                            </div>
+                            <h4 class="text-4xl font-black text-tech-text mb-6">報名成功！</h4>
+                            <div class="space-y-2 text-tech-textMuted text-xl max-w-lg mx-auto leading-relaxed">
+                                <p>我們已收到您的報名</p>
+                                <p>將於課程前兩周再提醒您</p>
+                                <p>請留意收信</p>
+                            </div>
+                            <button onclick="resetForm()" class="mt-12 bg-slate-50 hover:bg-white border border-slate-200 text-tech-primary font-bold px-8 py-3 rounded-xl transition-all flex items-center gap-2 mx-auto">
+                                <i data-lucide="arrow-left" class="w-5 h-5"></i> 填寫另一份報名表
+                            </button>
+                        </div>
+
+                        <!-- 錯誤訊息彈窗 -->
+                        <div id="errorMessage" class="hidden fixed bottom-10 left-1/2 -translate-x-1/2 bg-red-600 text-white px-6 py-3 rounded-xl shadow-2xl z-[100] animate-bounce">
+                            傳送失敗，請稍後再試。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第六區塊: 聯絡資訊 -->
+        <section id="contact" class="section-block mb-12">
+            <div class="w-full max-w-4xl mx-auto">
+                <div class="glass-panel rounded-[2.5rem] p-[1.5px] bg-gradient-to-r from-sky-300 via-cyan-300 to-violet-300 shadow-2xl shadow-sky-100/50">
+                    <div class="bg-white rounded-[2.4rem] p-8 sm:p-12 flex flex-col sm:flex-row items-center sm:items-start md:items-center justify-between gap-8 text-center sm:text-left">
+                        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+                            <div class="w-20 h-20 rounded-3xl bg-sky-50 flex items-center justify-center text-tech-primary border border-sky-100 shrink-0">
+                                <i data-lucide="headset" class="w-10 h-10"></i>
+                            </div>
+                            <div class="space-y-3 text-left">
+                                <p class="text-tech-text font-bold text-xl lg:text-2xl">有任何疑問？請聯繫我們</p>
+                                <p class="text-tech-textMuted text-base lg:text-lg font-medium">主辦：奇美醫療財團法人奇美醫院教學部</p>
+                                <p class="text-tech-textMuted text-base lg:text-lg font-medium">聯絡人：陳詩芸 教學行政管理員</p>
+                            </div>
+                        </div>
+                        <div class="space-y-4 flex flex-col items-center sm:items-start w-full sm:w-auto mt-4 sm:mt-0 font-bold">
+                            <a href="tel:062812811,57439" class="flex items-center gap-3 text-tech-textMuted hover:text-tech-primary hover:bg-sky-50 transition-all px-6 py-4 rounded-2xl border border-slate-100 w-full justify-center">
+                                <i data-lucide="phone" class="w-5 h-5 text-slate-400"></i>
+                                06-281-2811 分機 57439
+                            </a>
+                            <a href="mailto:b20715@mail.chimei.org.tw" class="flex items-center gap-3 text-tech-textMuted hover:text-tech-primary hover:bg-sky-50 transition-all px-6 py-4 rounded-2xl border border-slate-100 w-full justify-center">
+                                <i data-lucide="mail" class="w-5 h-5 text-slate-400"></i>
+                                b20715@mail.chimei.org.tw
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- 回到至頂按鈕 -->
+    <button id="backToTopBtn" onclick="scrollToTop()" class="fixed bottom-8 right-8 z-[60] w-14 h-14 bg-white/80 backdrop-blur-md border border-sky-100 text-tech-primary rounded-full shadow-xl shadow-sky-200/50 flex items-center justify-center opacity-0 invisible translate-y-4 transition-all duration-300 hover:bg-tech-primary hover:text-white group">
+        <i data-lucide="chevron-up" class="w-7 h-7 transition-transform group-hover:-translate-y-1"></i>
+    </button>
+
+    <script>
+        lucide.createIcons();
+
+        // 🚀 Google Apps Script URL
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwtIqkomcWdavGzgapoAZscTID-LOwanETcambFaQ3m2FyJOxBu5CZ8khuTTcsnqrruAw/exec';
+        
+        // 115年5月16日 倒數計時邏輯 (2026-05-16)
+        function updateCountdown() {
+            const targetDate = new Date('2026-05-16');
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            const diffTime = targetDate - today;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            const countEl = document.getElementById('days-count');
+            const container = document.getElementById('countdown-container');
+            
+            if (diffDays > 0) {
+                countEl.innerText = diffDays;
+            } else if (diffDays === 0) {
+                container.innerHTML = `
+                    <span class="relative flex h-3 w-3">
+                        <span class="animate-ping-slow absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                    </span>
+                    <span class="text-red-600 font-black text-lg tracking-widest">就是今天！期待您的蒞臨</span>
+                `;
+            } else {
+                container.classList.add('hidden');
+            }
+        }
+        updateCountdown();
+
+        const backToTopBtn = document.getElementById('backToTopBtn');
+
+        window.addEventListener('scroll', () => {
+            let current = "";
+            const sections = document.querySelectorAll('section');
+            const dots = document.querySelectorAll('.side-indicator-dot');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (window.pageYOffset >= (sectionTop - 300)) current = section.getAttribute('id');
+            });
+            
+            dots.forEach(dot => {
+                dot.classList.remove('active');
+                if (dot.getAttribute('href').includes(current)) dot.classList.add('active');
+            });
+
+            if (window.pageYOffset > 500) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        async function handleFormSubmit(e) {
+            e.preventDefault();
+            const form = document.getElementById('registrationForm');
+            const success = document.getElementById('successMessage');
+            const errorMsg = document.getElementById('errorMessage');
+            const btn = form.querySelector('button');
+            
+            btn.innerHTML = '<i data-lucide="loader-2" class="w-6 h-6 animate-spin"></i><span>資料傳送中...</span>';
+            lucide.createIcons();
+            btn.disabled = true;
+
+            const formData = new FormData(form);
+
+            try {
+                await fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors' });
+                form.classList.add('hidden');
+                success.classList.remove('hidden');
+                success.classList.add('flex');
+                lucide.createIcons();
+                document.getElementById('registration').scrollIntoView({ behavior: 'smooth' });
+            } catch (error) {
+                console.error('Submission Error:', error);
+                btn.disabled = false;
+                btn.innerHTML = '<i data-lucide="send" class="w-6 h-6"></i><span>送出報名資訊</span>';
+                lucide.createIcons();
+                errorMsg.classList.remove('hidden');
+                setTimeout(() => errorMsg.classList.add('hidden'), 5000);
+            }
+        }
+
+        function resetForm() {
+            const form = document.getElementById('registrationForm');
+            const success = document.getElementById('successMessage');
+            form.reset();
+            form.classList.remove('hidden');
+            success.classList.add('hidden');
+            success.classList.remove('flex');
+            const btn = form.querySelector('button');
+            btn.disabled = false;
+            btn.innerHTML = '<i data-lucide="send" class="w-6 h-6"></i><span>送出報名資訊</span>';
+            lucide.createIcons();
+        }
+
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let w, h;
+        function resize() {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+            initParticles();
+        }
+        window.addEventListener('resize', resize);
+        class Particle {
+            constructor() {
+                this.x = Math.random() * w; this.y = Math.random() * h;
+                this.vx = (Math.random() - 0.5) * 0.7; this.vy = (Math.random() - 0.5) * 0.7;
+                this.radius = 1.5;
+            }
+            update() {
+                this.x += this.vx; this.y += this.vy;
+                if (this.x < 0 || this.x > w) this.vx *= -1;
+                if (this.y < 0 || this.y > h) this.vy *= -1;
+            }
+            draw() {
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(14, 165, 233, 0.4)'; ctx.fill();
+            }
+        }
+        function initParticles() {
+            particles = [];
+            let numParticles = Math.min(Math.floor((w * h) / 10000), 100);
+            for (let i = 0; i < numParticles; i++) particles.push(new Particle());
+        }
+        function animate() {
+            ctx.clearRect(0, 0, w, h);
+            particles.forEach((p, i) => {
+                p.update(); p.draw();
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = p.x - particles[j].x, dy = p.y - particles[j].y, dist = Math.sqrt(dx*dx + dy*dy);
+                    if (dist < 150) {
+                        ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(14, 165, 233, ${(1 - dist/150) * 0.25})`; ctx.lineWidth = 1; ctx.stroke();
+                    }
+                }
+            });
+            requestAnimationFrame(animate);
+        }
+        resize(); animate();
+    </script>
+</body>
+</html>
