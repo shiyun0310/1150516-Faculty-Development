@@ -149,6 +149,16 @@
             visibility: visible;
             transform: translateY(0);
         }
+
+        /* 身分選擇器按鈕樣式 */
+        .identity-btn {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .identity-btn.active {
+            background: #0284c7;
+            color: white;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+        }
     </style>
 </head>
 <body class="antialiased min-h-screen relative">
@@ -585,8 +595,33 @@
                         <div class="absolute -top-6 -right-6 w-24 h-24 bg-sky-100 rounded-full blur-2xl opacity-50 z-0"></div>
                         <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-violet-100 rounded-full blur-3xl opacity-50 z-0"></div>
 
+                        <!-- 身分切換按鈕 -->
+                        <div class="flex justify-center gap-3 mb-10 relative z-10">
+                            <button type="button" onclick="setAffiliation('chimei')" id="btn-chimei" class="identity-btn active flex-1 max-w-[180px] py-3 lg:py-4 rounded-xl lg:rounded-2xl font-black border-2 border-sky-200 text-sm lg:text-lg">
+                                奇美體系
+                            </button>
+                            <button type="button" onclick="setAffiliation('external')" id="btn-external" class="identity-btn flex-1 max-w-[180px] py-3 lg:py-4 rounded-xl lg:rounded-2xl font-black border-2 border-sky-100 bg-white text-tech-textMuted text-sm lg:text-lg">
+                                院外機構
+                            </button>
+                        </div>
+
+                        <!-- 院外暫不開放提示訊息 -->
+                        <div id="externalNotice" class="hidden relative z-10 py-12 lg:py-20 text-center animate-in fade-in slide-in-from-bottom-4 duration-500">
+                            <div class="w-16 h-16 lg:w-20 lg:h-20 bg-amber-50 text-amber-500 rounded-full flex items-center justify-center mb-6 mx-auto border border-amber-100">
+                                <i data-lucide="info" class="w-10 h-10 lg:w-12 lg:h-12"></i>
+                            </div>
+                            <h4 class="text-xl lg:text-2xl font-bold text-tech-text mb-4">很抱歉！</h4>
+                            <p class="text-tech-textMuted text-base lg:text-xl max-w-md mx-auto leading-relaxed px-4 font-medium">
+                                目前優先開放予奇美體系同仁報名，後續將視報名情形開放院外參與。
+                            </p>
+                        </div>
+
                         <form id="registrationForm" class="space-y-6 lg:space-y-8 relative z-10 transition-all duration-300" onsubmit="handleFormSubmit(event)">
+                            <!-- 隱藏的身分屬性 -->
+                            <input type="hidden" name="affiliation" id="field-affiliation" value="奇美體系">
+
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 lg:gap-y-6">
+                                <!-- 姓名 (共通) -->
                                 <div class="input-group">
                                     <label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg transition-colors">姓名</label>
                                     <div class="relative group">
@@ -598,24 +633,40 @@
                                     </div>
                                 </div>
 
-                                <div class="input-group">
+                                <!-- 機構名稱 (院外專屬，預設隱藏) -->
+                                <div class="input-group hidden" id="group-institution">
+                                    <label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg transition-colors">機構名稱</label>
+                                    <div class="relative group">
+                                        <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1 rounded-lg transition-all group-focus-within:bg-sky-50">
+                                            <i data-lucide="landmark" class="w-4 h-4 lg:w-5 lg:h-5"></i>
+                                        </div>
+                                        <input type="text" name="institution" id="input-institution" placeholder="請輸入您的機構名稱" 
+                                            class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-xl lg:rounded-2xl py-2.5 lg:py-3.5 pl-11 lg:pl-14 pr-4 text-tech-text outline-none transition-all placeholder:text-slate-300 text-sm lg:text-base">
+                                    </div>
+                                </div>
+
+                                <!-- 人事號 (奇美專屬) -->
+                                <div class="input-group" id="group-employeeId">
                                     <label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg transition-colors">人事號</label>
                                     <div class="relative group">
                                         <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1 rounded-lg transition-all group-focus-within:bg-sky-50">
                                             <i data-lucide="id-card" class="w-4 h-4 lg:w-5 lg:h-5"></i>
                                         </div>
-                                        <input type="text" name="employeeId" required placeholder="請輸入人事號" 
+                                        <input type="text" name="employeeId" id="input-employeeId" required placeholder="請輸入人事號" 
+                                            oninput="this.value = this.value.toUpperCase()"
+                                            style="text-transform: uppercase;"
                                             class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-xl lg:rounded-2xl py-2.5 lg:py-3.5 pl-11 lg:pl-14 pr-4 text-tech-text outline-none transition-all placeholder:text-slate-300 text-sm lg:text-base">
                                     </div>
                                 </div>
 
-                                <div class="input-group">
-                                    <label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg transition-colors">院區</label>
+                                <!-- 院區 (奇美專屬) -->
+                                <div class="input-group" id="group-campus">
+                                    <label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg transition-colors">所屬院區</label>
                                     <div class="relative group">
                                         <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1 rounded-lg transition-all group-focus-within:bg-sky-50">
                                             <i data-lucide="building" class="w-4 h-4 lg:w-5 lg:h-5"></i>
                                         </div>
-                                        <select name="campus" required class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-xl lg:rounded-2xl py-2.5 lg:py-3.5 pl-11 lg:pl-14 pr-10 text-tech-text outline-none transition-all appearance-none text-sm lg:text-base">
+                                        <select name="campus" id="input-campus" required class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-xl lg:rounded-2xl py-2.5 lg:py-3.5 pl-11 lg:pl-14 pr-10 text-tech-text outline-none transition-all appearance-none text-sm lg:text-base">
                                             <option value="" disabled selected>請選擇院區</option>
                                             <option value="總院">總院</option>
                                             <option value="柳營">柳營</option>
@@ -627,17 +678,7 @@
                                     </div>
                                 </div>
 
-                                <div class="input-group">
-                                    <label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg transition-colors">聯繫電話 (分機或簡碼)</label>
-                                    <div class="relative group">
-                                        <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1 rounded-lg transition-all group-focus-within:bg-sky-50">
-                                            <i data-lucide="phone" class="w-4 h-4 lg:w-5 lg:h-5"></i>
-                                        </div>
-                                        <input type="text" name="phone" required placeholder="例如：57439 或 8123" 
-                                            class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-xl lg:rounded-2xl py-2.5 lg:py-3.5 pl-11 lg:pl-14 pr-4 text-tech-text outline-none transition-all placeholder:text-slate-300 text-sm lg:text-base">
-                                    </div>
-                                </div>
-
+                                <!-- 職類別 (共通) -->
                                 <div class="input-group">
                                     <label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg transition-colors">職類別</label>
                                     <div class="relative group">
@@ -666,8 +707,9 @@
                                     </div>
                                 </div>
 
+                                <!-- 單位 (共通) -->
                                 <div class="input-group">
-                                    <label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg transition-colors">單位</label>
+                                    <label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg transition-colors" id="label-department">所屬單位</label>
                                     <div class="relative group">
                                         <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1 rounded-lg transition-all group-focus-within:bg-sky-50">
                                             <i data-lucide="building-2" class="w-4 h-4 lg:w-5 lg:h-5"></i>
@@ -677,6 +719,7 @@
                                     </div>
                                 </div>
 
+                                <!-- 職稱 (共通) -->
                                 <div class="input-group">
                                     <label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg transition-colors">職稱</label>
                                     <div class="relative group">
@@ -688,6 +731,19 @@
                                     </div>
                                 </div>
 
+                                <!-- 聯繫電話 (共通) -->
+                                <div class="input-group">
+                                    <label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg transition-colors">聯繫電話</label>
+                                    <div class="relative group">
+                                        <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1 rounded-lg transition-all group-focus-within:bg-sky-50">
+                                            <i data-lucide="phone" class="w-4 h-4 lg:w-5 lg:h-5"></i>
+                                        </div>
+                                        <input type="text" name="phone" required placeholder="手機或分機" 
+                                            class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-xl lg:rounded-2xl py-2.5 lg:py-3.5 pl-11 lg:pl-14 pr-4 text-tech-text outline-none transition-all placeholder:text-slate-300 text-sm lg:text-base">
+                                    </div>
+                                </div>
+
+                                <!-- 電子信箱 (共通) -->
                                 <div class="input-group">
                                     <label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg transition-colors">電子信箱</label>
                                     <div class="relative group">
@@ -809,6 +865,49 @@
         lucide.createIcons();
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwtIqkomcWdavGzgapoAZscTID-LOwanETcambFaQ3m2FyJOxBu5CZ8khuTTcsnqrruAw/exec';
         
+        // 切換身分處理
+        function setAffiliation(type) {
+            const btnChimei = document.getElementById('btn-chimei');
+            const btnExternal = document.getElementById('btn-external');
+            const fieldAffiliation = document.getElementById('field-affiliation');
+            
+            const registrationForm = document.getElementById('registrationForm');
+            const externalNotice = document.getElementById('externalNotice');
+            
+            // 取得各身分專屬輸入框實體 (用來控制必填屬性)
+            const inputs = registrationForm.querySelectorAll('input, select');
+
+            if (type === 'chimei') {
+                btnChimei.classList.add('active');
+                btnExternal.classList.remove('active');
+                fieldAffiliation.value = "奇美體系";
+                
+                // 顯示表單，隱藏提示
+                registrationForm.classList.remove('hidden');
+                externalNotice.classList.add('hidden');
+                
+                // 恢復必填屬性
+                inputs.forEach(input => {
+                    if (input.name !== 'affiliation' && input.id !== 'input-institution') {
+                        input.required = true;
+                    }
+                });
+            } else {
+                btnChimei.classList.remove('active');
+                btnExternal.classList.add('active');
+                fieldAffiliation.value = "院外機構";
+                
+                // 隱藏表單，顯示提示
+                registrationForm.classList.add('hidden');
+                externalNotice.classList.remove('hidden');
+                
+                // 取消必填屬性防止驗證錯誤
+                inputs.forEach(input => input.required = false);
+            }
+            // 重新渲染新顯示區域的圖標
+            lucide.createIcons();
+        }
+
         function updateCountdown() {
             const targetDate = new Date('2026-05-16');
             const today = new Date();
@@ -858,6 +957,8 @@
             try {
                 await fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors' });
                 form.classList.add('hidden');
+                // 隱藏身分切換按鈕區域
+                document.getElementById('btn-chimei').parentElement.classList.add('hidden');
                 success.classList.remove('hidden');
                 success.classList.add('flex');
                 lucide.createIcons();
@@ -876,12 +977,14 @@
             const success = document.getElementById('successMessage');
             form.reset();
             form.classList.remove('hidden');
+            document.getElementById('btn-chimei').parentElement.classList.remove('hidden');
             success.classList.add('hidden');
             success.classList.remove('flex');
             const btn = form.querySelector('button');
             btn.disabled = false;
             btn.innerHTML = '<i data-lucide="send" class="w-5 h-5 lg:w-6 lg:h-6"></i><span>送出報名資訊</span>';
             lucide.createIcons();
+            setAffiliation('chimei');
         }
 
         const canvas = document.getElementById('particleCanvas');
