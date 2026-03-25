@@ -150,7 +150,6 @@
             transform: translateY(0);
         }
 
-        /* 身分選擇器按鈕樣式 */
         .identity-btn {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -278,7 +277,6 @@
                     </div>
                 </div>
 
-                <!-- 按鈕區塊 -->
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mt-10 lg:mt-16">
                     <a href="#core-concept" class="group flex items-center justify-center gap-2 bg-white text-tech-textMuted border-2 border-slate-200 hover:border-tech-primary hover:text-tech-primary font-bold py-3 px-8 lg:px-10 rounded-full shadow-sm hover:shadow-md transition-all duration-300 w-full sm:w-auto">
                         <span>了解活動</span>
@@ -370,6 +368,24 @@
                 
                 <div class="glass-panel rounded-2xl lg:rounded-[2rem] p-5 sm:p-10 lg:p-12">
                     <div class="relative border-l-2 border-sky-100 ml-1 sm:ml-4 lg:ml-10 space-y-8 lg:space-y-12">
+                        
+                        <!-- 12:00 座談餐會 -->
+                        <div class="relative pl-6 lg:pl-12">
+                            <div class="absolute w-4 h-4 bg-amber-500 border-2 border-white rounded-full -left-[9px] top-3 animate-pulse"></div>
+                            <div class="flex flex-col md:flex-row md:items-start gap-3 lg:gap-10">
+                                <div class="font-tech text-amber-600 font-black text-base lg:text-xl tracking-wide w-fit md:w-[14rem] shrink-0 flex items-center gap-3 bg-amber-50/80 border border-amber-100 px-3 py-1.5 lg:px-4 lg:py-2 rounded-xl">
+                                    <i data-lucide="utensils" class="w-4 h-4 lg:w-5 lg:h-5"></i>
+                                    12:00 ~ 12:50
+                                </div>
+                                <div class="bg-amber-50/40 border border-amber-100 rounded-2xl p-4 lg:p-6 flex-1 shadow-sm">
+                                    <h4 class="text-lg lg:text-xl font-bold text-tech-text mb-2">座談餐會</h4>
+                                    <p class="text-tech-textMuted text-sm lg:text-lg leading-relaxed font-medium">
+                                        由長官、各科（PGY、UGY 及住院醫師）及醫事職類訓練計畫主持人與北醫教學部郭淑柳副主任，共同討論並規劃本年度年底PEC進階工作坊相關事宜。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- 12:30 報到 -->
                         <div class="relative pl-6 lg:pl-12">
                             <div class="absolute w-3.5 h-3.5 bg-white border-2 border-tech-primary rounded-full -left-[8px] top-3"></div>
@@ -393,7 +409,7 @@
                                     12:50 ~ 13:00
                                 </div>
                                 <div class="bg-white/90 border border-slate-100 rounded-xl p-3 lg:p-5 flex-1 shadow-sm">
-                                    <h4 class="text-lg lg:text-xl font-bold text-tech-text">長官致詞 (主持: 黃建中總技師)</h4>
+                                    <h4 class="text-lg lg:text-xl font-bold text-tech-text">長官致詞</h4>
                                 </div>
                             </div>
                         </div>
@@ -425,6 +441,21 @@
                                             <p class="text-tech-textMuted text-xs lg:text-base font-medium">奇美醫院護理部</p>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 14:30 Coffee Break -->
+                        <div class="relative pl-6 lg:pl-12">
+                            <div class="absolute w-3.5 h-3.5 bg-white border-2 border-tech-primary rounded-full -left-[8px] top-3"></div>
+                            <div class="flex flex-col md:flex-row md:items-start gap-3 lg:gap-10">
+                                <div class="font-tech text-tech-primary font-black text-base lg:text-xl tracking-wide w-fit md:w-[14rem] shrink-0 flex items-center gap-3 bg-sky-50/80 border border-sky-100 px-3 py-1.5 lg:px-4 lg:py-2 rounded-xl">
+                                    <i data-lucide="coffee" class="w-4 h-4 lg:w-5 lg:h-5"></i>
+                                    14:30 ~ 14:45
+                                </div>
+                                <div class="bg-white/90 border border-slate-100 rounded-xl p-3 lg:p-5 flex-1 shadow-sm flex items-center gap-4">
+                                    <h4 class="text-lg lg:text-xl font-bold text-tech-text">Coffee Break</h4>
+                                    <span class="text-tech-primary/30"><i data-lucide="cup-soda" class="w-5 h-5"></i></span>
                                 </div>
                             </div>
                         </div>
@@ -534,7 +565,7 @@
                                     </div>
                                 </div>
 
-                                <!-- 人事號 (奇美) -->
+                                <!-- 人事號 -->
                                 <div class="input-group" id="group-employeeId">
                                     <label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg">人事號</label>
                                     <div class="relative group">
@@ -545,7 +576,7 @@
                                     </div>
                                 </div>
 
-                                <!-- 院區 (奇美) -->
+                                <!-- 院區 -->
                                 <div class="input-group" id="group-campus">
                                     <label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg">所屬院區</label>
                                     <div class="relative group">
@@ -562,7 +593,7 @@
                                     </div>
                                 </div>
 
-                                <!-- 身分 (奇美) -->
+                                <!-- 身分 -->
                                 <div class="input-group" id="group-identity">
                                     <label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg">身分</label>
                                     <div class="relative group">
@@ -578,7 +609,7 @@
                                     </div>
                                 </div>
 
-                                <!-- 座談餐會 (主持人 + 總院 專屬) -->
+                                <!-- 座談餐會 -->
                                 <div class="input-group hidden" id="group-luncheon">
                                     <label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg">參與 12:00~12:50 座談餐會</label>
                                     <div class="relative group">
@@ -594,7 +625,7 @@
                                     </div>
                                 </div>
 
-                                <!-- 餐食需求 (參與座談會時跳題) -->
+                                <!-- 餐食需求 -->
                                 <div class="input-group hidden" id="group-meal">
                                     <label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg">餐食需求</label>
                                     <div class="relative group">
@@ -720,17 +751,19 @@
                         <div class="space-y-6">
                             <div class="flex items-start gap-4">
                                 <div class="bg-sky-50 p-2 rounded-lg text-tech-primary"><i data-lucide="building-2" class="w-5 h-5"></i></div>
-                                <div><p class="text-xs font-black uppercase text-tech-textMuted mb-1">主辦</p><p class="text-tech-text font-bold">奇美醫院教學部</p></div>
+                                <div><p class="text-xs lg:text-sm font-black uppercase text-tech-textMuted mb-1">主辦單位</p><p class="text-tech-text font-bold text-base lg:text-lg leading-snug">奇美醫療財團法人奇美醫院教學部</p></div>
                             </div>
                             <div class="flex items-start gap-4">
                                 <div class="bg-violet-50 p-2 rounded-lg text-tech-secondary"><i data-lucide="mic" class="w-5 h-5"></i></div>
-                                <div><p class="text-xs font-black uppercase text-tech-textMuted mb-1">主持</p><p class="text-tech-text font-bold">黃建中 總技師</p></div>
+                                <div><p class="text-xs lg:text-sm font-black uppercase text-tech-textMuted mb-1">主持</p><p class="text-tech-text font-bold text-base lg:text-lg leading-snug">教學部醫事訓練組<br>執行秘書 黃建中總技師</p></div>
                             </div>
                         </div>
-                        <div class="bg-slate-50/50 p-5 rounded-2xl space-y-3">
-                            <div class="flex items-center gap-3"><i data-lucide="user" class="text-tech-accent w-4 h-4"></i><p class="text-tech-text font-bold">陳詩芸 教學行政管理員</p></div>
-                            <a href="tel:062812811,57439" class="flex items-center gap-3 text-sm text-tech-textMuted hover:text-tech-primary transition-colors"><i data-lucide="phone" class="w-4 h-4"></i>06-281-2811 分機 57439</a>
-                            <a href="mailto:b20715@mail.chimei.org.tw" class="flex items-center gap-3 text-sm text-tech-textMuted hover:text-tech-primary transition-colors break-all"><i data-lucide="mail" class="w-4 h-4"></i>b20715@mail.chimei.org.tw</a>
+                        <div class="bg-slate-50/50 p-5 lg:p-7 rounded-2xl space-y-4">
+                            <div class="flex items-center gap-3"><i data-lucide="user" class="text-tech-accent w-5 h-5"></i><p class="text-tech-text font-bold text-base lg:text-lg">陳詩芸 教學行政管理員</p></div>
+                            <div class="space-y-2">
+                                <a href="tel:062812811,57439" class="flex items-center gap-3 text-sm lg:text-base text-tech-textMuted hover:text-tech-primary transition-colors font-medium"><i data-lucide="phone" class="w-4 h-4"></i>06-281-2811 分機 57439</a>
+                                <a href="mailto:b20715@mail.chimei.org.tw" class="flex items-center gap-3 text-sm lg:text-base text-tech-textMuted hover:text-tech-primary transition-colors break-all font-medium"><i data-lucide="mail" class="w-4 h-4"></i>b20715@mail.chimei.org.tw</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -760,7 +793,6 @@
                 fieldAffiliation.value = "奇美體系";
                 form.classList.remove('hidden');
                 notice.classList.add('hidden');
-                // 恢復必填，但跳題欄位由 handleConditionalVisibility 控制
                 inputs.forEach(i => { 
                     if (!['luncheon', 'meal'].includes(i.name)) i.required = true; 
                 });
@@ -774,14 +806,12 @@
             }
         }
 
-        // 核心邏輯：判斷 院區 + 身分 是否要跳題
         function handleConditionalVisibility() {
             const campusVal = document.getElementById('input-campus').value;
             const identityVal = document.getElementById('input-identity').value;
             const lunGrp = document.getElementById('group-luncheon');
             const lunInp = document.getElementById('input-luncheon');
             
-            // 同時滿足「總院」且「訓練計畫主持人」
             if (campusVal === '總院' && identityVal === '我是 訓練計畫主持人也是臨床教師') {
                 lunGrp.classList.remove('hidden');
                 lunInp.required = true;
@@ -789,7 +819,7 @@
                 lunGrp.classList.add('hidden');
                 lunInp.required = false;
                 lunInp.value = "";
-                handleLuncheonChange(""); // 同步隱藏餐食選項
+                handleLuncheonChange(""); 
             }
             lucide.createIcons();
         }
