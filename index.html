@@ -157,6 +157,7 @@
             background: #0284c7;
             color: white;
             box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+            border-color: #0284c7;
         }
     </style>
 </head>
@@ -167,15 +168,6 @@
     <div class="glow-orb bg-sky-100 w-[50rem] h-[50rem] -top-40 -left-40 animate-pulse-slow"></div>
     <div class="glow-orb bg-violet-50 w-[30rem] h-[30rem] top-1/2 right-0 -translate-y-1/2 animate-pulse-slow opacity-20" style="animation-delay: 2s;"></div>
     <div class="glow-orb bg-cyan-50 w-[40rem] h-[40rem] bottom-0 left-1/4 animate-pulse-slow opacity-30" style="animation-delay: 1s;"></div>
-
-    <div class="fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col gap-5 p-3 rounded-full bg-white/30 backdrop-blur-sm border border-white/50">
-        <a href="#hero" class="side-indicator-dot" title="首頁"></a>
-        <a href="#core-concept" class="side-indicator-dot" title="核心理念"></a>
-        <a href="#details" class="side-indicator-dot" title="詳細內容"></a>
-        <a href="#agenda" class="side-indicator-dot" title="活動議程"></a>
-        <a href="#registration" class="side-indicator-dot" title="立即報名"></a>
-        <a href="#contact" class="side-indicator-dot" title="聯絡資訊"></a>
-    </div>
 
     <!-- 導航列 -->
     <nav class="fixed top-0 w-full z-50 glass-nav transition-all duration-300 h-16 lg:h-20">
@@ -196,7 +188,6 @@
                 <div class="flex items-center gap-3 lg:gap-10">
                     <div class="hidden lg:flex items-center space-x-8 text-lg xl:text-xl">
                         <a href="#core-concept" class="text-tech-textMuted hover:text-tech-primary font-bold tracking-wide transition-colors">核心理念</a>
-                        <a href="#details" class="text-tech-textMuted hover:text-tech-primary font-bold tracking-wide transition-colors">詳細內容</a>
                         <a href="#agenda" class="text-tech-textMuted hover:text-tech-primary font-bold tracking-wide transition-colors">活動議程</a>
                         <a href="#contact" class="text-tech-textMuted hover:text-tech-primary font-bold tracking-wide transition-colors">聯絡資訊</a>
                         <a href="https://raw.githubusercontent.com/shiyun0310/1150516-Faculty-Development/main/03%E6%B5%B7%E5%A0%B1-1150516%E6%95%99%E5%B8%AB%E6%95%99%E5%AD%B8%E6%88%90%E9%95%B7%E8%88%87%E5%9F%B9%E8%82%B2%E7%A0%94%E8%A8%8E%E6%9C%83.pdf" target="_blank" class="flex items-center gap-1.5 text-tech-primary hover:text-tech-secondary font-bold tracking-wide transition-colors">
@@ -368,7 +359,6 @@
                 
                 <div class="glass-panel rounded-2xl lg:rounded-[2rem] p-5 sm:p-10 lg:p-12">
                     <div class="relative border-l-2 border-sky-100 ml-1 sm:ml-4 lg:ml-10 space-y-8 lg:space-y-12">
-                        
                         <!-- 12:00 座談餐會 -->
                         <div class="relative pl-6 lg:pl-12">
                             <div class="absolute w-4 h-4 bg-amber-500 border-2 border-white rounded-full -left-[9px] top-3 animate-pulse"></div>
@@ -385,127 +375,13 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- 12:30 報到 -->
-                        <div class="relative pl-6 lg:pl-12">
-                            <div class="absolute w-3.5 h-3.5 bg-white border-2 border-tech-primary rounded-full -left-[8px] top-3"></div>
-                            <div class="flex flex-col md:flex-row md:items-start gap-3 lg:gap-10">
-                                <div class="font-tech text-tech-primary font-black text-base lg:text-xl tracking-wide w-fit md:w-[14rem] shrink-0 flex items-center gap-3 bg-sky-50/80 border border-sky-100 px-3 py-1.5 lg:px-4 lg:py-2 rounded-xl">
-                                    <i data-lucide="clock" class="w-4 h-4 lg:w-5 lg:h-5"></i>
-                                    12:30 ~ 12:50
-                                </div>
-                                <div class="bg-white/90 border border-slate-100 rounded-xl p-3 lg:p-5 flex-1 shadow-sm">
-                                    <h4 class="text-lg lg:text-xl font-bold text-tech-text">報 到</h4>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 12:50 致詞 -->
-                        <div class="relative pl-6 lg:pl-12">
-                            <div class="absolute w-3.5 h-3.5 bg-white border-2 border-tech-primary rounded-full -left-[8px] top-3"></div>
-                            <div class="flex flex-col md:flex-row md:items-start gap-3 lg:gap-10">
-                                <div class="font-tech text-tech-primary font-black text-base lg:text-xl tracking-wide w-fit md:w-[14rem] shrink-0 flex items-center gap-3 bg-sky-50/80 border border-sky-100 px-3 py-1.5 lg:px-4 lg:py-2 rounded-xl">
-                                    <i data-lucide="clock" class="w-4 h-4 lg:w-5 lg:h-5"></i>
-                                    12:50 ~ 13:00
-                                </div>
-                                <div class="bg-white/90 border border-slate-100 rounded-xl p-3 lg:p-5 flex-1 shadow-sm">
-                                    <h4 class="text-lg lg:text-xl font-bold text-tech-text">長官致詞</h4>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 13:00 PEC -->
-                        <div class="relative pl-6 lg:pl-12">
-                            <div class="absolute w-4 h-4 bg-tech-accent border-2 border-white rounded-full -left-[9px] top-3 animate-pulse"></div>
-                            <div class="flex flex-col md:flex-row md:items-start gap-3 lg:gap-10">
-                                <div class="font-tech text-tech-accent font-black text-base lg:text-xl tracking-wide w-fit md:w-[14rem] shrink-0 flex items-center gap-3 bg-cyan-50/80 border border-cyan-100 px-3 py-1.5 lg:px-4 lg:py-2 rounded-xl">
-                                    <i data-lucide="clock" class="w-4 h-4 lg:w-5 lg:h-5"></i>
-                                    13:00 ~ 14:30
-                                </div>
-                                <div class="bg-cyan-50/50 border border-cyan-100 rounded-2xl lg:rounded-3xl p-4 lg:p-8 flex-1 shadow-sm relative overflow-hidden">
-                                    <div class="absolute top-0 left-0 w-1 lg:w-2 h-full bg-tech-accent"></div>
-                                    <h4 class="text-xl lg:text-2xl font-bold text-tech-text mb-4 lg:mb-6 leading-tight">PEC 概論</h4>
-                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
-                                        <div class="bg-white/80 p-4 rounded-xl border border-cyan-50">
-                                            <p class="text-xs lg:text-lg text-tech-accent font-black tracking-widest mb-2 uppercase flex items-center gap-2">
-                                                <i data-lucide="mic" class="w-4 h-4"></i> 講者
-                                            </p>
-                                            <p class="text-lg lg:text-2xl text-tech-text font-bold">郭淑柳 副主任</p>
-                                            <p class="text-tech-textMuted text-xs lg:text-base font-medium">臺北醫學大學附設醫院教學部</p>
-                                        </div>
-                                        <div class="bg-white/80 p-4 rounded-xl border border-cyan-50">
-                                            <p class="text-xs lg:text-lg text-tech-secondary font-black tracking-widest mb-2 uppercase flex items-center gap-2">
-                                                <i data-lucide="user-check" class="w-4 h-4"></i> 座長
-                                            </p>
-                                            <p class="text-lg lg:text-2xl text-tech-text font-bold">江惠英 副部長</p>
-                                            <p class="text-tech-textMuted text-xs lg:text-base font-medium">奇美醫院護理部</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 14:30 Coffee Break -->
-                        <div class="relative pl-6 lg:pl-12">
-                            <div class="absolute w-3.5 h-3.5 bg-white border-2 border-tech-primary rounded-full -left-[8px] top-3"></div>
-                            <div class="flex flex-col md:flex-row md:items-start gap-3 lg:gap-10">
-                                <div class="font-tech text-tech-primary font-black text-base lg:text-xl tracking-wide w-fit md:w-[14rem] shrink-0 flex items-center gap-3 bg-sky-50/80 border border-sky-100 px-3 py-1.5 lg:px-4 lg:py-2 rounded-xl">
-                                    <i data-lucide="coffee" class="w-4 h-4 lg:w-5 lg:h-5"></i>
-                                    14:30 ~ 14:45
-                                </div>
-                                <div class="bg-white/90 border border-slate-100 rounded-xl p-3 lg:p-5 flex-1 shadow-sm flex items-center gap-4">
-                                    <h4 class="text-lg lg:text-xl font-bold text-tech-text">Coffee Break</h4>
-                                    <span class="text-tech-primary/30"><i data-lucide="cup-soda" class="w-5 h-5"></i></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 14:45 主題分享 -->
-                        <div class="relative pl-6 lg:pl-12">
-                            <div class="absolute w-4 h-4 bg-tech-secondary border-2 border-white rounded-full -left-[9px] top-3 animate-pulse"></div>
-                            <div class="flex flex-col md:flex-row md:items-start gap-3 lg:gap-10">
-                                <div class="font-tech text-tech-secondary font-black text-base lg:text-xl tracking-wide w-fit md:w-[14rem] shrink-0 flex items-center gap-3 bg-violet-50/80 border border-violet-100 px-3 py-1.5 lg:px-4 lg:py-2 rounded-xl">
-                                    <i data-lucide="clock" class="w-4 h-4 lg:w-5 lg:h-5"></i>
-                                    14:45 ~ 15:45
-                                </div>
-                                <div class="bg-violet-50/50 border border-violet-100 rounded-2xl lg:rounded-3xl p-4 lg:p-8 flex-1 shadow-sm relative overflow-hidden">
-                                    <div class="absolute top-0 left-0 w-1 lg:w-2 h-full bg-tech-secondary"></div>
-                                    <h4 class="text-xl lg:text-2xl font-bold text-tech-text mb-4 lg:mb-6 leading-tight">在教學中找到方法，也找回自己</h4>
-                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
-                                        <div class="bg-white/80 p-4 rounded-xl border border-violet-50">
-                                            <p class="text-xs lg:text-lg text-tech-secondary font-black tracking-widest mb-2 uppercase flex items-center gap-2">
-                                                <i data-lucide="mic" class="w-4 h-4"></i> 講者
-                                            </p>
-                                            <div class="space-y-4">
-                                                <div><p class="text-lg lg:text-2xl text-tech-text font-bold">余懷瑾 仙女老師</p><p class="text-tech-textMuted text-xs lg:text-base font-medium">以人顧問有限公司負責人</p></div>
-                                                <div class="border-t border-slate-100 pt-3"><p class="text-lg lg:text-2xl text-tech-text font-bold">倪昀安 專員</p><p class="text-tech-textMuted text-xs lg:text-base font-medium">台灣費森尤斯卡比</p></div>
-                                            </div>
-                                        </div>
-                                        <div class="bg-white/80 p-4 rounded-xl border border-violet-50">
-                                            <p class="text-xs lg:text-lg text-tech-primary font-black tracking-widest mb-2 uppercase flex items-center gap-2">
-                                                <i data-lucide="user-check" class="w-4 h-4"></i> 座長
-                                            </p>
-                                            <p class="text-lg lg:text-2xl text-tech-text font-bold">蔡長志 主任</p>
-                                            <p class="text-tech-textMuted text-xs lg:text-base font-medium">奇美醫院臨床技能中心</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 15:45 綜合討論 -->
-                        <div class="relative pl-6 lg:pl-12">
-                            <div class="absolute w-3.5 h-3.5 bg-white border-2 border-tech-primary rounded-full -left-[8px] top-3"></div>
-                            <div class="flex flex-col md:flex-row md:items-start gap-3 lg:gap-10">
-                                <div class="font-tech text-tech-primary font-black text-base lg:text-xl tracking-wide w-fit md:w-[14rem] shrink-0 flex items-center gap-3 bg-sky-50/80 border border-sky-100 px-3 py-1.5 lg:px-4 lg:py-2 rounded-xl">
-                                    <i data-lucide="clock" class="w-4 h-4 lg:w-5 lg:h-5"></i>
-                                    15:45 ~ 16:00
-                                </div>
-                                <div class="bg-white/90 border border-slate-100 rounded-xl p-3 lg:p-5 flex-1 shadow-sm">
-                                    <h4 class="text-lg lg:text-xl font-bold text-tech-text">綜合討論</h4>
-                                </div>
-                            </div>
-                        </div>
+                        <!-- 其他議程 -->
+                        <div class="relative pl-6 lg:pl-12"><div class="absolute w-3.5 h-3.5 bg-white border-2 border-tech-primary rounded-full -left-[8px] top-3"></div><div class="flex flex-col md:flex-row md:items-start gap-3 lg:gap-10"><div class="font-tech text-tech-primary font-black text-base lg:text-xl tracking-wide w-fit md:w-[14rem] shrink-0 flex items-center gap-3 bg-sky-50/80 border border-sky-100 px-3 py-1.5 lg:px-4 lg:py-2 rounded-xl"><i data-lucide="clock" class="w-4 h-4 lg:w-5 lg:h-5"></i>12:30 ~ 12:50</div><div class="bg-white/90 border border-slate-100 rounded-xl p-3 lg:p-5 flex-1 shadow-sm"><h4 class="text-lg lg:text-xl font-bold text-tech-text">報 到</h4></div></div></div>
+                        <div class="relative pl-6 lg:pl-12"><div class="absolute w-3.5 h-3.5 bg-white border-2 border-tech-primary rounded-full -left-[8px] top-3"></div><div class="flex flex-col md:flex-row md:items-start gap-3 lg:gap-10"><div class="font-tech text-tech-primary font-black text-base lg:text-xl tracking-wide w-fit md:w-[14rem] shrink-0 flex items-center gap-3 bg-sky-50/80 border border-sky-100 px-3 py-1.5 lg:px-4 lg:py-2 rounded-xl"><i data-lucide="clock" class="w-4 h-4 lg:w-5 lg:h-5"></i>12:50 ~ 13:00</div><div class="bg-white/90 border border-slate-100 rounded-xl p-3 lg:p-5 flex-1 shadow-sm"><h4 class="text-lg lg:text-xl font-bold text-tech-text">長官致詞</h4></div></div></div>
+                        <div class="relative pl-6 lg:pl-12"><div class="absolute w-4 h-4 bg-tech-accent border-2 border-white rounded-full -left-[9px] top-3 animate-pulse"></div><div class="flex flex-col md:flex-row md:items-start gap-3 lg:gap-10"><div class="font-tech text-tech-accent font-black text-base lg:text-xl tracking-wide w-fit md:w-[14rem] shrink-0 flex items-center gap-3 bg-cyan-50/80 border border-cyan-100 px-3 py-1.5 lg:px-4 lg:py-2 rounded-xl"><i data-lucide="clock" class="w-4 h-4 lg:w-5 lg:h-5"></i>13:00 ~ 14:30</div><div class="bg-cyan-50/50 border border-cyan-100 rounded-2xl lg:rounded-3xl p-4 lg:p-8 flex-1 shadow-sm relative overflow-hidden"><div class="absolute top-0 left-0 w-1 lg:w-2 h-full bg-tech-accent"></div><h4 class="text-xl lg:text-2xl font-bold text-tech-text mb-4 lg:mb-6 leading-tight">PEC 概論</h4><div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6"><div class="bg-white/80 p-4 rounded-xl border border-cyan-50"><p class="text-xs lg:text-lg text-tech-accent font-black tracking-widest mb-2 uppercase flex items-center gap-2"><i data-lucide="mic" class="w-4 h-4"></i> 講者</p><p class="text-lg lg:text-2xl text-tech-text font-bold">郭淑柳 副主任</p><p class="text-tech-textMuted text-xs lg:text-base font-medium">臺北醫學大學附設醫院教學部</p></div><div class="bg-white/80 p-4 rounded-xl border border-cyan-50"><p class="text-xs lg:text-lg text-tech-secondary font-black tracking-widest mb-2 uppercase flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4"></i> 座長</p><p class="text-lg lg:text-2xl text-tech-text font-bold">江惠英 副部長</p><p class="text-tech-textMuted text-xs lg:text-base font-medium">奇美醫院護理部</p></div></div></div></div></div>
+                        <div class="relative pl-6 lg:pl-12"><div class="absolute w-3.5 h-3.5 bg-white border-2 border-tech-primary rounded-full -left-[8px] top-3"></div><div class="flex flex-col md:flex-row md:items-start gap-3 lg:gap-10"><div class="font-tech text-tech-primary font-black text-base lg:text-xl tracking-wide w-fit md:w-[14rem] shrink-0 flex items-center gap-3 bg-sky-50/80 border border-sky-100 px-3 py-1.5 lg:px-4 lg:py-2 rounded-xl"><i data-lucide="coffee" class="w-4 h-4 lg:w-5 lg:h-5"></i>14:30 ~ 14:45</div><div class="bg-white/90 border border-slate-100 rounded-xl p-3 lg:p-5 flex-1 shadow-sm flex items-center gap-4"><h4 class="text-lg lg:text-xl font-bold text-tech-text">Coffee Break</h4><span class="text-tech-primary/30"><i data-lucide="cup-soda" class="w-5 h-5"></i></span></div></div></div>
+                        <div class="relative pl-6 lg:pl-12"><div class="absolute w-4 h-4 bg-tech-secondary border-2 border-white rounded-full -left-[9px] top-3 animate-pulse"></div><div class="flex flex-col md:flex-row md:items-start gap-3 lg:gap-10"><div class="font-tech text-tech-secondary font-black text-base lg:text-xl tracking-wide w-fit md:w-[14rem] shrink-0 flex items-center gap-3 bg-violet-50/80 border border-violet-100 px-3 py-1.5 lg:px-4 lg:py-2 rounded-xl"><i data-lucide="clock" class="w-4 h-4 lg:w-5 lg:h-5"></i>14:45 ~ 15:45</div><div class="bg-violet-50/50 border border-violet-100 rounded-2xl lg:rounded-3xl p-4 lg:p-8 flex-1 shadow-sm relative overflow-hidden"><div class="absolute top-0 left-0 w-1 lg:w-2 h-full bg-tech-secondary"></div><h4 class="text-xl lg:text-2xl font-bold text-tech-text mb-4 lg:mb-6 leading-tight">在教學中找到方法，也找回自己</h4><div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6"><div class="bg-white/80 p-4 rounded-xl border border-violet-50"><p class="text-xs lg:text-lg text-tech-secondary font-black tracking-widest mb-2 uppercase flex items-center gap-2"><i data-lucide="mic" class="w-4 h-4"></i> 講者</p><div class="space-y-4"><div><p class="text-lg lg:text-2xl text-tech-text font-bold">余懷瑾 仙女老師</p><p class="text-tech-textMuted text-xs lg:text-base font-medium">以人顧問有限公司負責人</p></div><div class="border-t border-slate-100 pt-3"><p class="text-lg lg:text-2xl text-tech-text font-bold">倪昀安 專員</p><p class="text-tech-textMuted text-xs lg:text-base font-medium">台灣費森尤斯卡比</p></div></div></div><div class="bg-white/80 p-4 rounded-xl border border-violet-50"><p class="text-xs lg:text-lg text-tech-primary font-black tracking-widest mb-2 uppercase flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4"></i> 座長</p><p class="text-lg lg:text-2xl text-tech-text font-bold">蔡長志 主任</p><p class="text-tech-textMuted text-xs lg:text-base font-medium">奇美醫院臨床技能中心</p></div></div></div></div></div>
+                        <div class="relative pl-6 lg:pl-12"><div class="absolute w-3.5 h-3.5 bg-white border-2 border-tech-primary rounded-full -left-[8px] top-3"></div><div class="flex flex-col md:flex-row md:items-start gap-3 lg:gap-10"><div class="font-tech text-tech-primary font-black text-base lg:text-xl tracking-wide w-fit md:w-[14rem] shrink-0 flex items-center gap-3 bg-sky-50/80 border border-sky-100 px-3 py-1.5 lg:px-4 lg:py-2 rounded-xl"><i data-lucide="clock" class="w-4 h-4 lg:w-5 lg:h-5"></i>15:45 ~ 16:00</div><div class="bg-white/90 border border-slate-100 rounded-xl p-3 lg:p-5 flex-1 shadow-sm"><h4 class="text-lg lg:text-xl font-bold text-tech-text">綜合討論</h4></div></div></div>
                     </div>
                 </div>
             </div>
@@ -530,9 +406,10 @@
                 </div>
 
                 <div class="max-w-4xl mx-auto">
-                    <div class="glass-panel rounded-2xl lg:rounded-[2.5rem] p-6 lg:p-12 shadow-2xl relative overflow-visible flex flex-col justify-center">
-                        <!-- 身分切換按鈕 -->
-                        <div class="flex justify-center gap-3 mb-10 relative z-10">
+                    <div class="glass-panel rounded-2xl lg:rounded-[2.5rem] p-6 lg:p-12 shadow-2xl relative overflow-visible flex flex-col justify-center min-h-[450px]">
+                        
+                        <!-- 身分切換按鈕 (ID: affiliation-toggle) -->
+                        <div id="affiliation-toggle" class="flex justify-center gap-3 mb-10 relative z-10">
                             <button type="button" onclick="setAffiliation('chimei')" id="btn-chimei" class="identity-btn active flex-1 max-w-[180px] py-3 lg:py-4 rounded-xl lg:rounded-2xl font-black border-2 border-sky-200 text-sm lg:text-lg">
                                 奇美體系
                             </button>
@@ -541,198 +418,49 @@
                             </button>
                         </div>
 
-                        <!-- 院外暫不開放提示 -->
-                        <div id="externalNotice" class="hidden relative z-10 py-12 lg:py-20 text-center">
-                            <div class="w-16 h-16 lg:w-20 lg:h-20 bg-amber-50 text-amber-500 rounded-full flex items-center justify-center mb-6 mx-auto border border-amber-100">
-                                <i data-lucide="info" class="w-10 h-10 lg:w-12 lg:h-12"></i>
+                        <!-- 院外機構提示訊息 (ID: external-msg) - 已調細體字 -->
+                        <div id="external-msg" class="hidden mb-10 p-6 lg:p-8 bg-sky-50 border border-sky-200 rounded-2xl lg:rounded-[2rem] flex flex-col items-center text-center gap-5 animate-in fade-in zoom-in duration-500">
+                            <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm text-tech-primary">
+                                <i data-lucide="info" class="w-8 h-8"></i>
                             </div>
-                            <h4 class="text-xl lg:text-2xl font-bold text-tech-text mb-4">很抱歉！</h4>
-                            <p class="text-tech-textMuted text-base lg:text-xl max-w-md mx-auto leading-relaxed px-4">目前優先開放予奇美體系同仁報名，後續將視報名情形開放院外參與。</p>
+                            <p class="text-tech-text font-medium text-base lg:text-xl leading-relaxed max-w-lg">
+                                目前優先開放<span class="text-tech-primary font-bold">奇美體系</span>同仁報名，後續將視報名情形開放外部機構參與。
+                            </p>
                         </div>
 
                         <form id="registrationForm" class="space-y-6 lg:space-y-8 relative z-10" onsubmit="handleFormSubmit(event)">
                             <input type="hidden" name="affiliation" id="field-affiliation" value="奇美體系">
-
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 lg:gap-y-6">
-                                <!-- 姓名 -->
-                                <div class="input-group">
-                                    <label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg">姓名</label>
-                                    <div class="relative group">
-                                        <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1 rounded-lg transition-all">
-                                            <i data-lucide="user" class="w-4 h-4 lg:w-5 lg:h-5"></i>
-                                        </div>
-                                        <input type="text" name="name" required placeholder="請輸入姓名" class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-xl lg:rounded-2xl py-2.5 lg:py-3.5 pl-11 lg:pl-14 pr-4 outline-none transition-all">
-                                    </div>
-                                </div>
-
-                                <!-- 人事號 -->
-                                <div class="input-group" id="group-employeeId">
-                                    <label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg">人事號</label>
-                                    <div class="relative group">
-                                        <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1 rounded-lg">
-                                            <i data-lucide="id-card" class="w-4 h-4 lg:w-5 lg:h-5"></i>
-                                        </div>
-                                        <input type="text" name="employeeId" id="input-employeeId" required placeholder="請輸入人事號" class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-xl lg:rounded-2xl py-2.5 lg:py-3.5 pl-11 lg:pl-14 pr-4 outline-none uppercase transition-all">
-                                    </div>
-                                </div>
-
-                                <!-- 院區 -->
-                                <div class="input-group" id="group-campus">
-                                    <label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg">所屬院區</label>
-                                    <div class="relative group">
-                                        <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1 rounded-lg">
-                                            <i data-lucide="building" class="w-4 h-4 lg:w-5 lg:h-5"></i>
-                                        </div>
-                                        <select name="campus" id="input-campus" required onchange="handleConditionalVisibility()" class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-xl lg:rounded-2xl py-2.5 lg:py-3.5 pl-11 lg:pl-14 pr-10 outline-none appearance-none transition-all">
-                                            <option value="" disabled selected>請選擇院區</option>
-                                            <option value="總院">總院</option>
-                                            <option value="柳營">柳營</option>
-                                            <option value="佳里">佳里</option>
-                                        </select>
-                                        <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400"><i data-lucide="chevron-down" class="w-4 h-4 lg:w-5 lg:h-5"></i></div>
-                                    </div>
-                                </div>
-
-                                <!-- 身分 -->
-                                <div class="input-group" id="group-identity">
-                                    <label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg">身分</label>
-                                    <div class="relative group">
-                                        <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1 rounded-lg">
-                                            <i data-lucide="user-check" class="w-4 h-4 lg:w-5 lg:h-5"></i>
-                                        </div>
-                                        <select name="identity" id="input-identity" required onchange="handleConditionalVisibility()" class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-xl lg:rounded-2xl py-2.5 lg:py-3.5 pl-11 lg:pl-14 pr-10 outline-none appearance-none transition-all">
-                                            <option value="" disabled selected>請選擇身分</option>
-                                            <option value="我是 訓練計畫主持人也是臨床教師">我是 訓練計畫主持人也是臨床教師</option>
-                                            <option value="我是 臨床教師">我是 臨床教師</option>
-                                        </select>
-                                        <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400"><i data-lucide="chevron-down" class="w-4 h-4 lg:w-5 lg:h-5"></i></div>
-                                    </div>
-                                </div>
-
-                                <!-- 座談餐會 -->
-                                <div class="input-group hidden" id="group-luncheon">
-                                    <label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg">參與 12:00~12:50 座談餐會</label>
-                                    <div class="relative group">
-                                        <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1 rounded-lg">
-                                            <i data-lucide="utensils" class="w-4 h-4 lg:w-5 lg:h-5"></i>
-                                        </div>
-                                        <select name="luncheon" id="input-luncheon" onchange="handleLuncheonChange(this.value)" class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-xl lg:rounded-2xl py-2.5 lg:py-3.5 pl-11 lg:pl-14 pr-10 outline-none appearance-none transition-all">
-                                            <option value="" disabled selected>請選擇意願</option>
-                                            <option value="可以參與座談會">可以參與座談會</option>
-                                            <option value="不克參與座談會，但可上課">不克參與座談會，但可上課</option>
-                                        </select>
-                                        <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400"><i data-lucide="chevron-down" class="w-4 h-4 lg:w-5 lg:h-5"></i></div>
-                                    </div>
-                                </div>
-
-                                <!-- 餐食需求 -->
-                                <div class="input-group hidden" id="group-meal">
-                                    <label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg">餐食需求</label>
-                                    <div class="relative group">
-                                        <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1 rounded-lg">
-                                            <i data-lucide="chef-hat" class="w-4 h-4 lg:w-5 lg:h-5"></i>
-                                        </div>
-                                        <select name="meal" id="input-meal" class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-xl lg:rounded-2xl py-2.5 lg:py-3.5 pl-11 lg:pl-14 pr-10 outline-none appearance-none transition-all">
-                                            <option value="" disabled selected>請選擇餐種</option>
-                                            <option value="葷">葷</option>
-                                            <option value="素">素</option>
-                                        </select>
-                                        <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400"><i data-lucide="chevron-down" class="w-4 h-4 lg:w-5 lg:h-5"></i></div>
-                                    </div>
-                                </div>
-
-                                <!-- 職類別 -->
-                                <div class="input-group">
-                                    <label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg">職類別</label>
-                                    <div class="relative group">
-                                        <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1 rounded-lg">
-                                            <i data-lucide="briefcase" class="w-4 h-4 lg:w-5 lg:h-5"></i>
-                                        </div>
-                                        <select name="category" required class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-xl lg:rounded-2xl py-2.5 lg:py-3.5 pl-11 lg:pl-14 pr-10 outline-none appearance-none transition-all">
-                                            <option value="" disabled selected>請選擇職類</option>
-                                            <option value="西醫">西醫</option>
-                                            <option value="藥事">藥事</option>
-                                            <option value="醫事放射">醫事放射</option>
-                                            <option value="醫事檢驗">醫事檢驗</option>
-                                            <option value="護理">護理</option>
-                                            <option value="營養">營養</option>
-                                            <option value="呼吸治療">呼吸治療</option>
-                                            <option value="聽力">聽力</option>
-                                            <option value="物理治療">物理治療</option>
-                                            <option value="職能治療">職能治療</option>
-                                            <option value="臨床心理">臨床心理</option>
-                                            <option value="語言治療">語言治療</option>
-                                            <option value="其他">其他</option>
-                                        </select>
-                                        <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400"><i data-lucide="chevron-down" class="w-4 h-4 lg:w-5 lg:h-5"></i></div>
-                                    </div>
-                                </div>
-
-                                <!-- 單位 -->
-                                <div class="input-group">
-                                    <label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg">所屬單位</label>
-                                    <div class="relative group">
-                                        <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1 rounded-lg">
-                                            <i data-lucide="building-2" class="w-4 h-4 lg:w-5 lg:h-5"></i>
-                                        </div>
-                                        <input type="text" name="department" required placeholder="例如：3BI、放射科" class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-xl lg:rounded-2xl py-2.5 lg:py-3.5 pl-11 lg:pl-14 pr-4 outline-none transition-all">
-                                    </div>
-                                </div>
-
-                                <!-- 職稱 -->
-                                <div class="input-group">
-                                    <label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg">職稱</label>
-                                    <div class="relative group">
-                                        <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1 rounded-lg">
-                                            <i data-lucide="tag" class="w-4 h-4 lg:w-5 lg:h-5"></i>
-                                        </div>
-                                        <input type="text" name="jobTitle" required placeholder="例如：主任、主治醫師" class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-xl lg:rounded-2xl py-2.5 lg:py-3.5 pl-11 lg:pl-14 pr-4 outline-none transition-all">
-                                    </div>
-                                </div>
-
-                                <!-- 聯繫電話 -->
-                                <div class="input-group">
-                                    <label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg">聯繫電話</label>
-                                    <div class="relative group">
-                                        <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1 rounded-lg">
-                                            <i data-lucide="phone" class="w-4 h-4 lg:w-5 lg:h-5"></i>
-                                        </div>
-                                        <input type="text" name="phone" required placeholder="簡碼或分機" class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-xl lg:rounded-2xl py-2.5 lg:py-3.5 pl-11 lg:pl-14 pr-4 outline-none transition-all">
-                                    </div>
-                                </div>
-
-                                <!-- 電子信箱 -->
-                                <div class="input-group">
-                                    <label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg">電子信箱</label>
-                                    <div class="relative group">
-                                        <div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1 rounded-lg">
-                                            <i data-lucide="mail" class="w-4 h-4 lg:w-5 lg:h-5"></i>
-                                        </div>
-                                        <input type="email" name="email" required placeholder="請留常用信箱" class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-xl lg:rounded-2xl py-2.5 lg:py-3.5 pl-11 lg:pl-14 pr-4 outline-none transition-all">
-                                    </div>
-                                </div>
+                                <div class="input-group"><label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg">姓名</label><div class="relative group"><div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1 rounded-lg transition-all"><i data-lucide="user" class="w-4 h-4 lg:w-5 lg:h-5"></i></div><input type="text" name="name" required placeholder="請輸入姓名" class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-xl lg:rounded-2xl py-2.5 lg:py-3.5 pl-11 lg:pl-14 pr-4 outline-none transition-all"></div></div>
+                                <div class="input-group" id="group-employeeId"><label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg">人事號</label><div class="relative group"><div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1 rounded-lg"><i data-lucide="id-card" class="w-4 h-4 lg:w-5 lg:h-5"></i></div><input type="text" name="employeeId" id="input-employeeId" required placeholder="請輸入人事號" class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-xl lg:rounded-2xl py-2.5 lg:py-3.5 pl-11 lg:pl-14 pr-4 outline-none uppercase transition-all"></div></div>
+                                <div class="input-group" id="group-campus"><label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg">所屬院區</label><div class="relative group"><div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1 rounded-lg"><i data-lucide="building" class="w-4 h-4 lg:w-5 lg:h-5"></i></div><select name="campus" id="input-campus" required onchange="handleConditionalVisibility()" class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-xl lg:rounded-2xl py-2.5 lg:py-3.5 pl-11 lg:pl-14 pr-10 outline-none appearance-none transition-all"><option value="" disabled selected>請選擇院區</option><option value="總院">總院</option><option value="柳營">柳營</option><option value="佳里">佳里</option></select><div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400"><i data-lucide="chevron-down" class="w-4 h-4 lg:w-5 lg:h-5"></i></div></div></div>
+                                <div class="input-group" id="group-identity"><label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg">身分</label><div class="relative group"><div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1 rounded-lg"><i data-lucide="user-check" class="w-4 h-4 lg:w-5 lg:h-5"></i></div><select name="identity" id="input-identity" required onchange="handleConditionalVisibility()" class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-xl lg:rounded-2xl py-2.5 lg:py-3.5 pl-11 lg:pl-14 pr-10 outline-none appearance-none transition-all"><option value="" disabled selected>請選擇身分</option><option value="我是 訓練計畫主持人也是臨床教師">我是 訓練計畫主持人也是臨床教師</option><option value="我是 臨床教師">我是 臨床教師</option></select><div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400"><i data-lucide="chevron-down" class="w-4 h-4 lg:w-5 lg:h-5"></i></div></div></div>
+                                <div class="input-group hidden" id="group-luncheon"><label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg">參與 12:00~12:50 座談餐會</label><div class="relative group"><div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1 rounded-lg"><i data-lucide="utensils" class="w-4 h-4 lg:w-5 lg:h-5"></i></div><select name="luncheon" id="input-luncheon" onchange="handleLuncheonChange(this.value)" class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-xl lg:rounded-2xl py-2.5 lg:py-3.5 pl-11 lg:pl-14 pr-10 outline-none appearance-none transition-all"><option value="" disabled selected>請選擇意願</option><option value="可以參與座談會">可以參與座談會</option><option value="不克參與座談會，但可上課">不克參與座談會，但可上課</option></select><div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400"><i data-lucide="chevron-down" class="w-4 h-4 lg:w-5 lg:h-5"></i></div></div></div>
+                                <div class="input-group hidden" id="group-meal"><label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg">餐食需求</label><div class="relative group"><div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1 rounded-lg"><i data-lucide="chef-hat" class="w-4 h-4 lg:w-5 lg:h-5"></i></div><select name="meal" id="input-meal" class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-xl lg:rounded-2xl py-2.5 lg:py-3.5 pl-11 lg:pl-14 pr-10 outline-none appearance-none transition-all"><option value="" disabled selected>請選擇餐種</option><option value="葷">葷</option><option value="素">素</option></select><div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400"><i data-lucide="chevron-down" class="w-4 h-4 lg:w-5 lg:h-5"></i></div></div></div>
+                                <div class="input-group"><label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg">職類別</label><div class="relative group"><div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1 rounded-lg"><i data-lucide="briefcase" class="w-4 h-4 lg:w-5 lg:h-5"></i></div><select name="category" required class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-xl lg:rounded-2xl py-2.5 lg:py-3.5 pl-11 lg:pl-14 pr-10 outline-none appearance-none transition-all"><option value="" disabled selected>請選擇職類</option><option value="西醫">西醫</option><option value="藥事">藥事</option><option value="醫事放射">醫事放射</option><option value="醫事檢驗">醫事檢驗</option><option value="護理">護理</option><option value="營養">營養</option><option value="呼吸治療">呼吸治療</option><option value="聽力">聽力</option><option value="物理治療">物理治療</option><option value="職能治療">職能治療</option><option value="臨床心理">臨床心理</option><option value="語言治療">語言治療</option><option value="其他">其他</option></select><div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400"><i data-lucide="chevron-down" class="w-4 h-4 lg:w-5 lg:h-5"></i></div></div></div>
+                                <div class="input-group"><label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg">所屬單位</label><div class="relative group"><div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1 rounded-lg"><i data-lucide="building-2" class="w-4 h-4 lg:w-5 lg:h-5"></i></div><input type="text" name="department" required placeholder="例如：3BI、放射科" class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-xl lg:rounded-2xl py-2.5 lg:py-3.5 pl-11 lg:pl-14 pr-4 outline-none transition-all"></div></div>
+                                <div class="input-group"><label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg">職稱</label><div class="relative group"><div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1 rounded-lg"><i data-lucide="tag" class="w-4 h-4 lg:w-5 lg:h-5"></i></div><input type="text" name="jobTitle" required placeholder="例如：主任、主治醫師" class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-xl lg:rounded-2xl py-2.5 lg:py-3.5 pl-11 lg:pl-14 pr-4 outline-none transition-all"></div></div>
+                                <div class="input-group"><label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg">聯繫電話</label><div class="relative group"><div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1 rounded-lg"><i data-lucide="phone" class="w-4 h-4 lg:w-5 lg:h-5"></i></div><input type="text" name="phone" required placeholder="簡碼或分機" class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-xl lg:rounded-2xl py-2.5 lg:py-3.5 pl-11 lg:pl-14 pr-4 outline-none transition-all"></div></div>
+                                <div class="input-group"><label class="block text-tech-text font-bold mb-1.5 lg:mb-2 ml-1 text-base lg:text-lg">電子信箱</label><div class="relative group"><div class="icon-container absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 p-1 rounded-lg"><i data-lucide="mail" class="w-4 h-4 lg:w-5 lg:h-5"></i></div><input type="email" name="email" required placeholder="請留常用信箱" class="w-full bg-white/50 border border-slate-200 focus:border-tech-primary focus:ring-4 focus:ring-sky-100 rounded-xl lg:rounded-2xl py-2.5 lg:py-3.5 pl-11 lg:pl-14 pr-4 outline-none transition-all"></div></div>
                             </div>
-
-                            <div class="pt-4 lg:pt-6">
-                                <button type="submit" class="w-full bg-gradient-to-r from-tech-primary to-tech-secondary hover:from-sky-500 hover:to-violet-500 text-white font-black py-3.5 lg:py-4 rounded-xl lg:rounded-2xl shadow-xl transition-all flex items-center justify-center gap-3 text-lg">
-                                    <i data-lucide="send" class="w-6 h-6"></i><span>送出報名資訊</span>
-                                </button>
-                            </div>
+                            <div class="pt-4 lg:pt-6"><button type="submit" class="w-full bg-gradient-to-r from-tech-primary to-tech-secondary hover:from-sky-500 hover:to-violet-500 text-white font-black py-3.5 lg:py-4 rounded-xl lg:rounded-2xl shadow-xl transition-all flex items-center justify-center gap-3 text-lg"><i data-lucide="send" class="w-6 h-6"></i><span>送出報名資訊</span></button></div>
                         </form>
 
-                        <!-- 報名成功 -->
-                        <div id="successMessage" class="hidden relative z-10 flex-col items-center justify-center text-center py-6 lg:py-10 animate-in fade-in zoom-in">
-                            <div class="w-16 h-16 lg:w-24 lg:h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-6 lg:mb-8 shadow-sm">
-                                <i data-lucide="check-circle" class="w-10 h-10 lg:w-14 lg:h-14"></i>
+                        <!-- 報名成功畫面 (ID: successMessage) -->
+                        <div id="successMessage" class="hidden relative z-10 w-full flex flex-col items-center justify-center text-center py-10 lg:py-16 animate-in fade-in zoom-in duration-500">
+                            <div class="w-20 h-20 lg:w-28 lg:h-28 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-8 lg:mb-10 shadow-sm">
+                                <i data-lucide="check-circle" class="w-12 h-12 lg:w-16 lg:h-16"></i>
                             </div>
-                            <h4 class="text-3xl lg:text-4xl font-black text-tech-text mb-4 lg:mb-6">報名成功！</h4>
-                            <div class="space-y-2 lg:space-y-4 text-tech-textMuted text-base lg:text-xl max-w-lg mx-auto leading-relaxed">
+                            <h4 class="text-3xl lg:text-5xl font-black text-tech-text mb-6 lg:mb-8">報名成功！</h4>
+                            <div class="space-y-4 lg:space-y-6 text-tech-textMuted text-base lg:text-xl max-w-xl px-4 leading-relaxed font-medium">
                                 <p>我們已收到您的報名，謝謝。</p>
                                 <p>將於課程開始前兩週再次寄發提醒通知，敬請留意！</p>
                             </div>
-                            <a href="#hero" onclick="resetForm()" class="mt-8 lg:mt-12 bg-slate-50 border border-slate-200 text-tech-primary font-bold px-8 py-3 rounded-xl transition-all flex items-center gap-2">
-                                <i data-lucide="home" class="w-4 h-4"></i> 回到首頁
-                            </a>
+                            <div class="mt-12 lg:mt-16">
+                                <button onclick="resetForm()" class="bg-white border-2 border-slate-200 text-tech-primary hover:border-tech-primary hover:bg-sky-50 font-bold px-10 py-3.5 lg:px-14 rounded-full shadow-sm transition-all flex items-center gap-3">
+                                    <i data-lucide="home" class="w-5 h-5"></i> 回到首頁
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -779,31 +507,32 @@
         lucide.createIcons();
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwtIqkomcWdavGzgapoAZscTID-LOwanETcambFaQ3m2FyJOxBu5CZ8khuTTcsnqrruAw/exec';
 
+        // 身分切換邏輯
         function setAffiliation(type) {
             const btnChimei = document.getElementById('btn-chimei');
             const btnExternal = document.getElementById('btn-external');
             const fieldAffiliation = document.getElementById('field-affiliation');
             const form = document.getElementById('registrationForm');
-            const notice = document.getElementById('externalNotice');
-            const inputs = form.querySelectorAll('input, select');
-
+            const externalMsg = document.getElementById('external-msg');
+            
             if (type === 'chimei') {
                 btnChimei.classList.add('active');
                 btnExternal.classList.remove('active');
+                btnExternal.classList.add('bg-white', 'text-tech-textMuted');
                 fieldAffiliation.value = "奇美體系";
+                
                 form.classList.remove('hidden');
-                notice.classList.add('hidden');
-                inputs.forEach(i => { 
-                    if (!['luncheon', 'meal'].includes(i.name)) i.required = true; 
-                });
+                externalMsg.classList.add('hidden');
             } else {
                 btnChimei.classList.remove('active');
+                btnChimei.classList.add('bg-white', 'text-tech-textMuted');
                 btnExternal.classList.add('active');
                 fieldAffiliation.value = "院外機構";
+                
                 form.classList.add('hidden');
-                notice.classList.remove('hidden');
-                inputs.forEach(i => i.required = false);
+                externalMsg.classList.remove('hidden');
             }
+            lucide.createIcons();
         }
 
         function handleConditionalVisibility() {
@@ -811,15 +540,10 @@
             const identityVal = document.getElementById('input-identity').value;
             const lunGrp = document.getElementById('group-luncheon');
             const lunInp = document.getElementById('input-luncheon');
-            
             if (campusVal === '總院' && identityVal === '我是 訓練計畫主持人也是臨床教師') {
-                lunGrp.classList.remove('hidden');
-                lunInp.required = true;
+                lunGrp.classList.remove('hidden'); lunInp.required = true;
             } else {
-                lunGrp.classList.add('hidden');
-                lunInp.required = false;
-                lunInp.value = "";
-                handleLuncheonChange(""); 
+                lunGrp.classList.add('hidden'); lunInp.required = false; lunInp.value = ""; handleLuncheonChange(""); 
             }
             lucide.createIcons();
         }
@@ -828,12 +552,9 @@
             const mealGrp = document.getElementById('group-meal');
             const mealInp = document.getElementById('input-meal');
             if (val === '可以參與座談會') {
-                mealGrp.classList.remove('hidden');
-                mealInp.required = true;
+                mealGrp.classList.remove('hidden'); mealInp.required = true;
             } else {
-                mealGrp.classList.add('hidden');
-                mealInp.required = false;
-                mealInp.value = "";
+                mealGrp.classList.add('hidden'); mealInp.required = false; mealInp.value = "";
             }
             lucide.createIcons();
         }
@@ -842,8 +563,10 @@
             const diff = new Date('2026-05-16') - new Date().setHours(0,0,0,0);
             const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
             const el = document.getElementById('days-count');
-            if (days > 0) el.innerText = days;
-            else if (days === 0) document.getElementById('countdown-container').innerHTML = "就是今天！期待您的蒞臨";
+            if (el) {
+                if (days > 0) el.innerText = days;
+                else if (days === 0) document.getElementById('countdown-container').innerHTML = "就是今天！期待您的蒞臨";
+            }
         }
         updateCountdown();
 
@@ -858,37 +581,36 @@
         async function handleFormSubmit(e) {
             e.preventDefault();
             const form = document.getElementById('registrationForm');
-            const btn = form.querySelector('button');
+            const btn = form.querySelector('button[type="submit"]');
             const originalTxt = btn.innerHTML;
             btn.innerHTML = '<span>傳送中...</span>';
             btn.disabled = true;
+
+            const formData = new FormData(form);
+            const params = new URLSearchParams();
+            for (const pair of formData.entries()) { params.append(pair[0], pair[1]); }
+
             try {
-                await fetch(scriptURL, { method: 'POST', body: new FormData(form), mode: 'no-cors' });
+                await fetch(scriptURL, { method: 'POST', body: params.toString(), headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, mode: 'no-cors' });
+                // 隱藏切換按鈕、表單與可能存在的提示訊息
+                document.getElementById('affiliation-toggle').classList.add('hidden');
                 form.classList.add('hidden');
-                document.getElementById('btn-chimei').parentElement.classList.add('hidden');
-                document.getElementById('successMessage').classList.remove('hidden');
+                document.getElementById('external-msg').classList.add('hidden');
+                // 顯示成功訊息
+                const successMsg = document.getElementById('successMessage');
+                successMsg.classList.remove('hidden');
+                successMsg.classList.add('flex');
             } catch (err) {
-                btn.disabled = false;
-                btn.innerHTML = originalTxt;
-                alert('傳送失敗，請稍後再試。');
+                btn.disabled = false; btn.innerHTML = originalTxt;
+                alert('傳送時發生錯誤，請稍後再試。');
             }
         }
 
-        function resetForm() {
-            const form = document.getElementById('registrationForm');
-            form.reset();
-            form.classList.remove('hidden');
-            document.getElementById('btn-chimei').parentElement.classList.remove('hidden');
-            document.getElementById('successMessage').classList.add('hidden');
-            document.getElementById('group-luncheon').classList.add('hidden');
-            document.getElementById('group-meal').classList.add('hidden');
-            setAffiliation('chimei');
-        }
+        function resetForm() { location.reload(); }
 
         const canvas = document.getElementById('particleCanvas');
         const ctx = canvas.getContext('2d');
-        let particles = [];
-        let w, h;
+        let particles = []; let w, h;
         function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
         window.addEventListener('resize', resize);
         class P {
