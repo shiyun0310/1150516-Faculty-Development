@@ -159,6 +159,20 @@
             box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
             border-color: #0284c7;
         }
+
+        /* Loading Spinner */
+        .loader {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3498db;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body class="antialiased min-h-screen relative">
@@ -418,7 +432,7 @@
                             </button>
                         </div>
 
-                        <!-- 院外機構提示訊息 (ID: external-msg) - 已調細體字 -->
+                        <!-- 院外機構提示訊息 (ID: external-msg) -->
                         <div id="external-msg" class="hidden mb-10 p-6 lg:p-8 bg-sky-50 border border-sky-200 rounded-2xl lg:rounded-[2rem] flex flex-col items-center text-center gap-5 animate-in fade-in zoom-in duration-500">
                             <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm text-tech-primary">
                                 <i data-lucide="info" class="w-8 h-8"></i>
@@ -504,7 +518,10 @@
     </button>
 
     <script>
+        // Initialize Lucide Icons
         lucide.createIcons();
+
+        // Target Apps Script URL
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwtIqkomcWdavGzgapoAZscTID-LOwanETcambFaQ3m2FyJOxBu5CZ8khuTTcsnqrruAw/exec';
 
         // 身分切換邏輯
@@ -540,10 +557,15 @@
             const identityVal = document.getElementById('input-identity').value;
             const lunGrp = document.getElementById('group-luncheon');
             const lunInp = document.getElementById('input-luncheon');
+            
             if (campusVal === '總院' && identityVal === '我是 訓練計畫主持人也是臨床教師') {
-                lunGrp.classList.remove('hidden'); lunInp.required = true;
+                lunGrp.classList.remove('hidden'); 
+                lunInp.required = true;
             } else {
-                lunGrp.classList.add('hidden'); lunInp.required = false; lunInp.value = ""; handleLuncheonChange(""); 
+                lunGrp.classList.add('hidden'); 
+                lunInp.required = false; 
+                lunInp.value = ""; 
+                handleLuncheonChange(""); 
             }
             lucide.createIcons();
         }
@@ -552,75 +574,168 @@
             const mealGrp = document.getElementById('group-meal');
             const mealInp = document.getElementById('input-meal');
             if (val === '可以參與座談會') {
-                mealGrp.classList.remove('hidden'); mealInp.required = true;
+                mealGrp.classList.remove('hidden'); 
+                mealInp.required = true;
             } else {
-                mealGrp.classList.add('hidden'); mealInp.required = false; mealInp.value = "";
+                mealGrp.classList.add('hidden'); 
+                mealInp.required = false; 
+                mealInp.value = "";
             }
             lucide.createIcons();
         }
 
         function updateCountdown() {
-            const diff = new Date('2026-05-16') - new Date().setHours(0,0,0,0);
+            const targetDate = new Date('2026-05-16').setHours(0,0,0,0);
+            const today = new Date().setHours(0,0,0,0);
+            const diff = targetDate - today;
             const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+            
             const el = document.getElementById('days-count');
+            const container = document.getElementById('countdown-container');
+            
             if (el) {
-                if (days > 0) el.innerText = days;
-                else if (days === 0) document.getElementById('countdown-container').innerHTML = "就是今天！期待您的蒞臨";
+                if (days > 0) {
+                    el.innerText = days;
+                } else if (days === 0) {
+                    container.innerHTML = `<span class="text-tech-primary font-black text-sm lg:text-lg tracking-widest">就是今天！期待您的蒞臨</span>`;
+                } else {
+                    container.innerHTML = `<span class="text-tech-textMuted font-bold text-sm lg:text-lg tracking-widest">活動已圓滿結束</span>`;
+                }
             }
         }
         updateCountdown();
 
+        // Scroll events
         window.addEventListener('scroll', () => {
             const btn = document.getElementById('backToTopBtn');
-            if (window.pageYOffset > 500) { btn.classList.add('show'); btn.classList.remove('invisible', 'opacity-0'); }
-            else { btn.classList.remove('show'); btn.classList.add('invisible', 'opacity-0'); }
+            if (window.pageYOffset > 500) { 
+                btn.classList.add('show'); 
+                btn.classList.remove('invisible', 'opacity-0'); 
+            } else { 
+                btn.classList.remove('show'); 
+                btn.classList.add('invisible', 'opacity-0'); 
+            }
         });
 
-        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        function scrollToTop() { 
+            window.scrollTo({ top: 0, behavior: 'smooth' }); 
+        }
 
+        // Form Submission
         async function handleFormSubmit(e) {
             e.preventDefault();
             const form = document.getElementById('registrationForm');
             const btn = form.querySelector('button[type="submit"]');
             const originalTxt = btn.innerHTML;
-            btn.innerHTML = '<span>傳送中...</span>';
+            
+            // UI Loading state
+            btn.innerHTML = '<div class="loader"></div><span>傳送中...</span>';
             btn.disabled = true;
 
             const formData = new FormData(form);
             const params = new URLSearchParams();
-            for (const pair of formData.entries()) { params.append(pair[0], pair[1]); }
+            for (const pair of formData.entries()) { 
+                params.append(pair[0], pair[1]); 
+            }
 
             try {
-                await fetch(scriptURL, { method: 'POST', body: params.toString(), headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, mode: 'no-cors' });
-                // 隱藏切換按鈕、表單與可能存在的提示訊息
+                // Fetch with no-cors as Apps Script usually redirects
+                await fetch(scriptURL, { 
+                    method: 'POST', 
+                    body: params.toString(), 
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, 
+                    mode: 'no-cors' 
+                });
+                
+                // Success state UI
                 document.getElementById('affiliation-toggle').classList.add('hidden');
                 form.classList.add('hidden');
                 document.getElementById('external-msg').classList.add('hidden');
-                // 顯示成功訊息
+                
                 const successMsg = document.getElementById('successMessage');
                 successMsg.classList.remove('hidden');
                 successMsg.classList.add('flex');
+                
+                // Smooth scroll to success message
+                successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
             } catch (err) {
-                btn.disabled = false; btn.innerHTML = originalTxt;
-                alert('傳送時發生錯誤，請稍後再試。');
+                console.error('Submission error:', err);
+                btn.disabled = false; 
+                btn.innerHTML = originalTxt;
+                
+                // Custom error box instead of alert
+                const errorDiv = document.createElement('div');
+                errorDiv.className = "fixed top-20 left-1/2 -translate-x-1/2 bg-red-50 border border-red-200 text-red-600 px-6 py-4 rounded-2xl shadow-2xl z-[100] font-bold";
+                errorDiv.innerText = "傳送時發生錯誤，請檢查網路連線或稍後再試。";
+                document.body.appendChild(errorDiv);
+                setTimeout(() => errorDiv.remove(), 4000);
             }
         }
 
-        function resetForm() { location.reload(); }
+        function resetForm() { 
+            window.location.hash = '#hero';
+            location.reload(); 
+        }
 
+        // Particle background logic
         const canvas = document.getElementById('particleCanvas');
         const ctx = canvas.getContext('2d');
-        let particles = []; let w, h;
-        function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
-        window.addEventListener('resize', resize);
-        class P {
-            constructor() { this.x = Math.random()*w; this.y = Math.random()*h; this.vx = (Math.random()-0.5)*0.5; this.vy = (Math.random()-0.5)*0.5; }
-            update() { this.x += this.vx; this.y += this.vy; if(this.x<0||this.x>w) this.vx*=-1; if(this.y<0||this.y>h) this.vy*=-1; }
-            draw() { ctx.beginPath(); ctx.arc(this.x, this.y, 1, 0, Math.PI*2); ctx.fillStyle='rgba(14,165,233,0.3)'; ctx.fill(); }
+        let particles = []; 
+        let w, h;
+
+        function resize() { 
+            w = canvas.width = window.innerWidth; 
+            h = canvas.height = window.innerHeight; 
         }
-        function init() { particles=[]; for(let i=0;i<60;i++) particles.push(new P()); }
-        function loop() { ctx.clearRect(0,0,w,h); particles.forEach(p=>{p.update();p.draw();}); requestAnimationFrame(loop); }
-        resize(); init(); loop();
+
+        window.addEventListener('resize', () => {
+            resize();
+            init();
+        });
+
+        class P {
+            constructor() { 
+                this.x = Math.random() * w; 
+                this.y = Math.random() * h; 
+                this.vx = (Math.random() - 0.5) * 0.4; 
+                this.vy = (Math.random() - 0.5) * 0.4; 
+                this.size = Math.random() * 1.5 + 0.5;
+            }
+            update() { 
+                this.x += this.vx; 
+                this.y += this.vy; 
+                if(this.x < 0 || this.x > w) this.vx *= -1; 
+                if(this.y < 0 || this.y > h) this.vy *= -1; 
+            }
+            draw() { 
+                ctx.beginPath(); 
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); 
+                ctx.fillStyle = 'rgba(14, 165, 233, 0.2)'; 
+                ctx.fill(); 
+            }
+        }
+
+        function init() { 
+            particles = []; 
+            const count = Math.min(Math.floor(w / 20), 80);
+            for(let i = 0; i < count; i++) particles.push(new P()); 
+        }
+
+        function loop() { 
+            ctx.clearRect(0, 0, w, h); 
+            particles.forEach(p => { 
+                p.update(); 
+                p.draw(); 
+            }); 
+            requestAnimationFrame(loop); 
+        }
+
+        window.onload = function() {
+            resize(); 
+            init(); 
+            loop();
+        }
     </script>
 </body>
 </html>
